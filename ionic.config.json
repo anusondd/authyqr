@@ -1,0 +1,8 @@
+{
+  "name": "AuthyQR",
+  "app_id": "f967420a",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
