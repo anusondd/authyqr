@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { App,IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TostServiceProvider } from '../../providers/tost-service/tost-service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the TansectionsPage page.
@@ -18,8 +20,15 @@ export class TansectionsPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public app:App
+    public app:App,
+    private Auth:AngularFireAuth,
+    public Tost:TostServiceProvider
   ) {
+    this.Auth.authState.subscribe(data=>{
+      
+      console.log(data.uid+','+data.email);
+      
+    })
   }
 
   ionViewDidLoad() {

@@ -2,14 +2,14 @@
   <div class="center_screen">
     <img class="logo" src="assets/img/authentication.png" alt="Logo">
     <div class="input_area">
-      <ion-icon name="md-person"></ion-icon>
-    <input type="text" placeholder="User Name Or E-mail Id">
+        <ion-icon name="md-person"></ion-icon>
+      <input type="text" placeholder="E-mail" [(ngModel)]='user.email' >
+      </div>
+      <div class="input_area">
+        <ion-icon name="md-lock"></ion-icon>
+      <input type="password" placeholder="Password" [(ngModel)]='user.password' >
     </div>
-    <div class="input_area">
-      <ion-icon name="md-lock"></ion-icon>
-    <input type="password" placeholder="Password">
-    </div>
-    <button ion-button full color="primary" round navPush="TabPage" >Log in</button>
+    <button ion-button full color="primary" round (click)="Login(user)" >Log in</button>
     <div class="forgotpassword_section">
       <button ion-button icon-left clear small color=extralight navPush="ForgetPasswordPage">
         <ion-icon name="md-key"></ion-icon>

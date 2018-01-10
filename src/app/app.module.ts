@@ -14,6 +14,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 // for AngularFireAuth
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { TostServiceProvider } from '../providers/tost-service/tost-service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFireDatabaseModule,
@@ -33,7 +36,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    TostServiceProvider
   ]
 })
 export class AppModule {}
