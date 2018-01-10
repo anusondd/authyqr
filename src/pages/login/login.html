@@ -1,0 +1,35 @@
+<ion-content padding>
+  <div class="center_screen">
+    <img class="logo" src="assets/img/authentication.png" alt="Logo">
+    <div class="input_area">
+      <ion-icon name="md-person"></ion-icon>
+    <input type="text" placeholder="User Name Or E-mail Id">
+    </div>
+    <div class="input_area">
+      <ion-icon name="md-lock"></ion-icon>
+    <input type="password" placeholder="Password">
+    </div>
+    <button ion-button full color="primary" round navPush="TabPage" >Log in</button>
+    <div class="forgotpassword_section">
+      <button ion-button icon-left clear small color=extralight navPush="ForgetPasswordPage">
+        <ion-icon name="md-key"></ion-icon>
+        Forget password?
+      </button>
+      <button ion-button icon-left clear small color=extralight navPush="RegisterPage">
+        <ion-icon name="md-person-add"></ion-icon>
+        Register
+      </button>
+    </div>
+  </div>
+  <!-- <ion-footer>
+      <button ion-button icon-left color=facebook>
+        <ion-icon name="logo-facebook"></ion-icon>
+        facebook
+      </button>
+
+      <button ion-button icon-left color=gmail>
+        <ion-icon name="logo-googleplus"></ion-icon>
+        G-mail
+      </button>
+  </ion-footer> -->
+</ion-content>

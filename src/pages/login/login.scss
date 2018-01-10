@@ -1,0 +1,81 @@
+page-login {
+    ion-content {
+      background-image: url("../assets/img/bg.jpg");
+      background-size: cover;
+      display: flex;
+      .scroll-content {
+        display: flex;
+        .center_screen {
+          margin: auto;
+          width: 100%;
+          .logo {
+            width: map_get($width, logo);
+            display: table;
+            margin:0 auto map_get($margin, big);
+          }
+          .input_area {
+            display: flex;
+            background-color: #fff;
+            border-radius: 60px;
+            height: map_get($height, btnheight);
+            overflow: hidden;
+            margin-bottom: map_get($margin, small);
+            ion-icon {
+              margin: auto;
+              padding: 0 16px;
+              color: map_get($colors, lightdark);
+              font-size: map_get($font, small);
+            }
+            input {
+              border: 0;
+              flex: 1;
+              background-color: transparent;
+              margin: auto;
+              height: map_get($height, btnheight);
+              font-size: map_get($font, small);
+            }
+  
+            input::-webkit-input-placeholder {
+              color: map_get($colors, lightdark) !important;
+              font-size: map_get($font, bitsmall) !important;
+            }
+  
+            input:-moz-placeholder { /* Firefox 18- */
+              color: map_get($colors, lightdark) !important;
+              font-size: map_get($font, bitsmall) !important;
+            }
+  
+            input::-moz-placeholder { /* Firefox 19+ */
+              color: map_get($colors, lightdark) !important;
+              font-size: map_get($font, bitsmall) !important;
+            }
+  
+            input:-ms-input-placeholder {
+              color: map_get($colors, lightdark) !important;
+              font-size: map_get($font, bitsmall) !important;
+            }
+          }
+          .forgotpassword_section {
+            display: flex;
+            justify-content: space-between;
+            .button.button-small {
+              font-size: map_get($font, bitsmall);
+              margin: 0;
+              padding: 0;
+              margin-top: 16px;
+            }
+          }
+        }
+        ion-footer {
+          display: flex;
+          .button.button {
+            margin: 0;
+            flex: 1;
+            height: map_get($height, btnheight);
+            border-radius: 0;
+          }
+        }
+      }
+    }
+  }
+  
