@@ -36,10 +36,16 @@ export class TansectionsPage {
   }
 
   logOut(){
-    this.navCtrl.setRoot('LoginPage');
-    
-    const root = this.app.getRootNav();
-          root.popToRoot();
+    this.Auth.auth.signOut().then(result=>{
+        console.log('pass',result);
+        this.navCtrl.setRoot('LoginPage');    
+        const root = this.app.getRootNav();
+              root.popToRoot();
+        
+    }).catch(error=>{
+      console.log('error',error);
+    })
+   
   }
 
 }

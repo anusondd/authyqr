@@ -23,7 +23,7 @@ export class ForgetPasswordPage {
     email:'anusondd@gmail.com',
     password:'21519097'
   };
-  massage:string;
+  message:string;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ForgetPasswordPage');
@@ -32,9 +32,11 @@ export class ForgetPasswordPage {
   Resetpassword(user:User){
     this.Auth.auth.sendPasswordResetEmail(user.email).then(result=>{
       console.log('pass',result);
-      
+      this.Tost.presentToast('Please check your email to change your password.');
     }).catch(error=>{
       console.log('error',error);
+      this.message = error.message;
+      this.Tost.presentToast(this.message);
     })
 
   }

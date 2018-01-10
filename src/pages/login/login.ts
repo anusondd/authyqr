@@ -27,12 +27,13 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    
   }
 
   Login(user:User){
       this.Auth.auth.signInWithEmailAndPassword(user.email,user.password).then(result=>{
         console.log('pass',result.uid)
-        localStorage.setItem('UID',result.uid)
+        //localStorage.setItem('UID',result.uid)
         this.navCtrl.push('TabPage');
         
       }).catch(error=>{
