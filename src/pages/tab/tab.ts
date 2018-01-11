@@ -17,7 +17,7 @@ export class TabPage {
 
   tansectionsRoot = 'TansectionsPage'
   qrcodeRoot = 'QrcodePage'
-  profileRoot = 'ProfilePage'
+  personalRoot = 'PersonalPage'
 
 
   constructor(public navCtrl: NavController) {}

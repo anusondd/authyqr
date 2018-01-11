@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 //import { AngularFireAuth } from 'angularfire2/auth';
 import { TostServiceProvider } from '../providers/tost-service/tost-service';
 import { HttpClientModule } from '@angular/common/http';
+import { PersonalServiceProvider } from '../providers/personal-service/personal-service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TostServiceProvider
+    TostServiceProvider,
+    PersonalServiceProvider
   ]
 })
 export class AppModule {}
