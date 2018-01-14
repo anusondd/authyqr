@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, App } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
+import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 
 /**
  * Generated class for the TabPage tabs.
@@ -20,6 +23,20 @@ export class TabPage {
   personalRoot = 'PersonalPage'
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(
+    public navCtrl: NavController,
+    private Auth:AngularFireAuth,
+    private PersonalService:PersonalServiceProvider,
+    public Tost:TostServiceProvider,
+    public app:App
+  ) {
+    this.Auth.authState.subscribe(user=>{
+      this.PersonalService.getPersonal(user.uid).subscribe(res=>{
+        if(res.phoneNmener!=''){
+          this.navCtrl.push('AddPersonalPage');
+        }
+      })
+    }).closed;
+  }
   
 }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../models/User';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
-
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -16,7 +16,9 @@ export class RegisterPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private Auth:AngularFireAuth,
-    public Tost:TostServiceProvider
+    public Tost:TostServiceProvider,
+    private Database:AngularFireDatabase,
+    public app:App,
   ) {
   }
 
@@ -25,6 +27,19 @@ export class RegisterPage {
     password:'21519097'
   };
   massage:string;
+  person={
+    titleName:'',
+    firstName:'',
+    lastName:'',
+    birthday:'',
+    address:'',
+    personalNumber:'',
+    metier:'',
+    phoneNmener:'',
+    pictureProfile:'',
+    picturePersonalCard:'',
+    approvePersonal:''
+  };
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
@@ -33,7 +48,10 @@ export class RegisterPage {
   register(user:User){
     this.Auth.auth.createUserWithEmailAndPassword(user.email,user.password).then(result=>{
       console.log('pass',result)
-      this.navCtrl.push('LoginPage')
+      this.Database.object('personal/'+result.uid).set(this.person).then(result=>{})
+      this.navCtrl.setRoot('LoginPage');    
+        const root = this.app.getRootNav();
+              root.popToRoot();
     }).catch(error=>{
       console.log('error',error)
       this.massage = error;

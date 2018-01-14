@@ -4,5 +4,11 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [
+    {
+      "path": "/verify",
+      "proxyUrl": "https://api.nexmo.com/verify"
+    }
+  ]
 }

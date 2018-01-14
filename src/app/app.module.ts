@@ -9,7 +9,7 @@ import { FirebaseConfig } from './firebae-Config';
 
 import { AngularFireModule } from 'angularfire2';
 // for AngularFireDatabase
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 //import { AngularFireDatabase } from 'angularfire2/database';
 // for AngularFireAuth
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { TostServiceProvider } from '../providers/tost-service/tost-service';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonalServiceProvider } from '../providers/personal-service/personal-service';
+import { VerifyPhonenumberServiceProvider } from '../providers/verify-phonenumber-service/verify-phonenumber-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PersonalServiceProvider } from '../providers/personal-service/personal-
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TostServiceProvider,
-    PersonalServiceProvider
+    PersonalServiceProvider,
+    VerifyPhonenumberServiceProvider
   ]
 })
 export class AppModule {}

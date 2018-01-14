@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, App } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { VerifyPhonenumberServiceProvider } from '../../providers/verify-phonenumber-service/verify-phonenumber-service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
+import { Personal } from '../../models/Presonal';
+import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 
 @IonicPage()
 @Component({
@@ -9,12 +14,25 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class VerifyPhonenumberPage {
   phoneNumber:FormGroup;
+  code='';
+  id='';
+  personal:Personal;
+  number:string;
+  
+  
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private VerifyPhonenumber:VerifyPhonenumberServiceProvider,
+    public alertCtrl: AlertController,
+    private Auth:AngularFireAuth,
+    private PersonalService:PersonalServiceProvider,
+    public Tost:TostServiceProvider,
+    public app:App
   ) {
+    
     this.phoneNumber = this.formBuilder.group({
       number:['',Validators.compose([
           Validators.required, 
@@ -33,8 +51,70 @@ export class VerifyPhonenumberPage {
 
   sendOTP(phoneNumber:FormGroup){
     let Numberp = phoneNumber.value;
-    console.log(Numberp.number)
+    let sub = Numberp.number;
+    this.number = Numberp.number;
+    let str = sub.substring(1, 10);
+    //console.log(str)
+    this.VerifyPhonenumber.verify('66'+str).subscribe(result=>{
+      console.log(result)
+      console.log(result.request_id)
+      sessionStorage.setItem('request_id',result.request_id);
+    })
+    if(result.status=="0"){
+      this.promptAlerts();
+    }else{
+      this.Tost.presentToast(result.error_text);
+    }
     
+    
+  }
+
+  promptAlerts(){
+      let prompt = this.alertCtrl.create({
+        title: 'Confirmation OTP',
+        message: "Please enter the 4 digit  OTP code Valid for 5 minutes",
+        inputs: [
+          {
+            name: 'OTP',
+            placeholder: '0000'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'OK',
+            handler: data => {
+              let request_id = sessionStorage.getItem('request_id');
+              console.log('Saved clicked',data.OTP);
+              this.VerifyPhonenumber.check(request_id,data.OTP).subscribe(result=>{
+                console.log('resultOTP',result);
+                if(result.status=="0"){
+                  console.log('OK');
+                  this.Auth.authState.subscribe(user=>{
+                      this.personal = new Personal('','','','','','','',this.number,'','',null);
+                      this.PersonalService.updatePersonal(user.uid,this.personal).then(res=>{
+                        this.Tost.presentToast('VerifyPhonenumber Success');
+                        this.navCtrl.push('AddPersonalPage');
+                      }).catch(error=>{
+                        this.Tost.presentToast(error);
+                        this.navCtrl.push('VerifyPhonenumberPage');
+                      })
+                  })                
+                }else{
+                  this.promptAlerts();
+                }
+              })
+            }
+          }
+        ]
+      });
+      prompt.present();
+
   }
 
 }

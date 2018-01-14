@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { User } from '../../models/User';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
-import {  AngularFireDatabase } from 'angularfire2/database';
+import {  AngularFireDatabase} from 'angularfire2/database-deprecated';
 import { Personal } from '../../models/Presonal';
+import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -18,53 +20,41 @@ export class LoginPage {
     password:'21519097'
   };
   message:string;
-  person={
-    titleName:'',
-    firstName:'',
-    lastName:'',
-    birthday:'',
-    address:'',
-    personalNumber:'',
-    metier:'',
-    phoneNmener:'',
-    pictureProfile:'',
-    picturePersonalCard:'',
-    approvePersonal:''
-  };
+  personal:{};
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     private Auth:AngularFireAuth,
     public Tost:TostServiceProvider,
-    private Database:AngularFireDatabase
+    private Database:AngularFireDatabase,
+    private PersonalService:PersonalServiceProvider,
+    public app:App
   ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
     
+    
   }
 
   Login(user:User){
       this.Auth.auth.signInWithEmailAndPassword(user.email,user.password).then(result=>{
-        console.log('pass',result.phoneNumber)
-        //localStorage.setItem('UID',result.uid)
-        if(!result.phoneNumber){
-          this.Database.object('personal/'+result.uid).set(this.person).then(result=>{
-            console.log('pass',result);
-            this.navCtrl.push('VerifyPhonenumberPage');                     
-          })
-        }else{
-          this.navCtrl.push('TabPage'); 
-        }
-        
-        
-      }).catch(error=>{
-        console.log('error',error.message)
-        this.message = error.message;
-        this.Tost.presentToast(this.message);
-      })
+        console.log('pass',result.uid);
+        this.PersonalService.getPersonal(result.uid).subscribe(res=>{
+          console.log(res.phoneNmener);
+          if(res.phoneNmener==''){
+            console.log('toVerifyPhonenumber');
+            this.navCtrl.push('VerifyPhonenumberPage');
+          }else{
+            console.log('Pass');
+            this.navCtrl.setRoot('TabPage');    
+            const root = this.app.getRootNav();
+              root.popToRoot();
+          }          
+        });
+      });
   }
 
 }
