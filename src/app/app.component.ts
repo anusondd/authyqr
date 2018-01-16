@@ -17,7 +17,7 @@ export class MyApp {
     splashScreen: SplashScreen,
     Auth:AngularFireAuth
   ) {
-    const subscribe =  Auth.authState.subscribe(user=>{
+     let subscribe =  Auth.authState.subscribe(user=>{
         if(!user){
           this.rootPage = 'LoginPage';
         }else{

@@ -46,12 +46,21 @@ export class LoginPage {
           console.log(res.phoneNmener);
           if(res.phoneNmener==''){
             console.log('toVerifyPhonenumber');
-            this.navCtrl.push('VerifyPhonenumberPage');
-          }else{
-            console.log('Pass');
-            this.navCtrl.setRoot('TabPage');    
+            this.navCtrl.setRoot('VerifyPhonenumberPage');    
             const root = this.app.getRootNav();
               root.popToRoot();
+          }else{
+            if(res.firstName==''){
+                console.log('VerifyPhonenumber Pass');
+                this.navCtrl.setRoot('AddPersonalPage');    
+                const root = this.app.getRootNav();
+                  root.popToRoot();
+            }else{
+                console.log('Pass');
+                this.navCtrl.setRoot('TabPage');    
+                const root = this.app.getRootNav();
+                  root.popToRoot();
+            }            
           }          
         });
       });

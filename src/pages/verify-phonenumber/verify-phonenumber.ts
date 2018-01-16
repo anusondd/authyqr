@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
 import { Personal } from '../../models/Presonal';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
+import { VerifyPhonenumber } from '../../models/verify-Phone';
 
 @IonicPage()
 @Component({
@@ -55,16 +56,18 @@ export class VerifyPhonenumberPage {
     this.number = Numberp.number;
     let str = sub.substring(1, 10);
     //console.log(str)
-    this.VerifyPhonenumber.verify('66'+str).subscribe(result=>{
+    this.VerifyPhonenumber.verify('66'+str).then(result=>{
+      const verifyPhonenumber:any = result;
       console.log(result)
-      console.log(result.request_id)
-      sessionStorage.setItem('request_id',result.request_id);
+      console.log(verifyPhonenumber.request_id)
+      sessionStorage.setItem('request_id',verifyPhonenumber.request_id);
+      if(verifyPhonenumber.status=="0"){
+        this.promptAlerts();
+      }else{
+        this.Tost.presentToast(verifyPhonenumber.error_text);
+      }
     })
-    if(result.status=="0"){
-      this.promptAlerts();
-    }else{
-      this.Tost.presentToast(result.error_text);
-    }
+    
     
     
   }
@@ -91,9 +94,10 @@ export class VerifyPhonenumberPage {
             handler: data => {
               let request_id = sessionStorage.getItem('request_id');
               console.log('Saved clicked',data.OTP);
-              this.VerifyPhonenumber.check(request_id,data.OTP).subscribe(result=>{
+              this.VerifyPhonenumber.check(request_id,data.OTP).then(result=>{
                 console.log('resultOTP',result);
-                if(result.status=="0"){
+                const verifyPhonenumber:any = result;
+                if(verifyPhonenumber.status=="0"){ 
                   console.log('OK');
                   this.Auth.authState.subscribe(user=>{
                       this.personal = new Personal('','','','','','','',this.number,'','',null);
@@ -115,6 +119,19 @@ export class VerifyPhonenumberPage {
       });
       prompt.present();
 
+  }
+
+  logOut(){
+    this.Auth.auth.signOut().then(result=>{
+        console.log('pass',result);
+        this.navCtrl.setRoot('LoginPage');    
+        const root = this.app.getRootNav();
+              root.popToRoot();
+        
+    }).catch(error=>{
+      console.log('error',error);
+    })
+   
   }
 
 }

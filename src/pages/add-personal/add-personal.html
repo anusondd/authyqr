@@ -1,18 +1,64 @@
-<!--
-  Generated template for the AddPersonalPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
     <ion-title>add-personal</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only color="royal" (click)="logOut()">
+            <ion-icon name="md-exit"></ion-icon>
+          </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <div class="center_screen">
 
+        <div class="pro-pic-change">
+          <div class="image">
+            <img [src]="base64Image" *ngIf="base64Image"/>
+            <img src="assets/img/qr-code.jpg" />
+          </div>
+          <button ion-button round outline color=primary (tap)="changeprofilepic()">
+            <ion-icon name="md-camera"></ion-icon>
+          </button>
+        </div>
+    
+        <div class="input_area">
+          <ion-icon name="md-person"></ion-icon>
+          <input type="text" placeholder="Title">
+        </div>
+        <div class="input_area">
+          <ion-icon name="md-person"></ion-icon>
+          <input type="text" placeholder="FirstName">
+        </div>
+        <div class="input_area">
+          <ion-icon name="md-person"></ion-icon>
+          <input type="text" placeholder="LastName">
+        </div>
+        <div class="input_area">
+            <ion-icon name="md-card"></ion-icon>
+            <input type="text" placeholder="Number ID">
+          </div>
+        <div class="input_area">
+          <ion-icon name="md-calendar"></ion-icon>
+          <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Date of Birth"></ion-datetime>
+        </div>
+        <div class="input_area">
+          <ion-icon name="md-locate"></ion-icon>
+          <input type="text" placeholder="Address">
+        </div>        
+        <div class="input_area">
+          <ion-icon name="md-call"></ion-icon>
+          <input type="text" placeholder="Phone Number">
+        </div>      
+        <button ion-button icon-right color="primary"  round (tap)="back()">
+            ID Card
+            <ion-icon name="md-camera"></ion-icon>
+        </button>
+        <button ion-button margin-top full icon-right color="primary" round (tap)="back()">SUBMIT
+        </button>
+      </div>
 </ion-content>
