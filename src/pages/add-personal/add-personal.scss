@@ -8,6 +8,21 @@ page-add-personal {
       .center_screen {
         margin: auto;
         width: 100%;
+        .input_textarea{
+          display: flex;
+          background-color: #fff;
+          border-radius: 60px;
+          height: 10%;
+          overflow: hidden;
+          margin-bottom: map_get($margin, small);
+          ion-icon {
+            margin: auto;
+            padding: 0 16px;
+            color: map_get($colors, lightdark);
+            font-size: map_get($font, small);
+          }
+
+        }
         .input_area {
           display: flex;
           background-color: #fff;
@@ -99,7 +114,8 @@ page-add-personal {
           height: map_get($height, propic);
           width: map_get($width, propic);
           position: relative;
-          border-radius: 100%;
+          border: 100%;
+          //border-radius: 100%;
           margin: auto auto map_get($margin, medium) auto;
           .button {
             position: absolute;
@@ -118,11 +134,13 @@ page-add-personal {
             position: relative;
             height: map_get($height, propic);
             width: map_get($width, propic);
-            border-radius: 100%;
+            border: 100%;
+            //border-radius: 100%;
             overflow: hidden;
             border: 1px solid rgba(51, 51, 51, 0.39);
             img {
               max-width: 100%;
+              max-height: 100%;
             }
           }
 

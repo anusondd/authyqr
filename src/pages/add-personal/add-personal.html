@@ -14,51 +14,58 @@
 
 
 <ion-content padding>
+    
     <div class="center_screen">
-
+        
         <div class="pro-pic-change">
           <div class="image">
-            <img [src]="base64Image" *ngIf="base64Image"/>
-            <img src="assets/img/qr-code.jpg" />
+            <!-- <img [src]="assets/img/user-icon.png" *ngIf="base64Image"/> -->
+            <img *ngIf="pictureProfile==''" src="assets/img/user-icon.png" />
+            <img *ngIf="pictureProfile!=''" src="{{pictureProfile}}|async" />
           </div>
-          <button ion-button round outline color=primary (tap)="changeprofilepic()">
+          <button ion-button round outline color=primary (click)="takePictureProfile()">
             <ion-icon name="md-camera"></ion-icon>
           </button>
         </div>
+        <form [formGroup]="personalFrom" (ngSubmit)="addPersonal(personalFrom)">
+        <div class="input_area">
+            <ion-icon name="md-people"></ion-icon>
+            <ion-select interface="action-sheet" placeholder="Select gender" formControlName="titleName">
+              <ion-option>Mr.</ion-option>
+              <ion-option>Miss</ion-option>
+              <ion-option>Mrs.</ion-option>
+            </ion-select>
+        </div>
     
         <div class="input_area">
-          <ion-icon name="md-person"></ion-icon>
-          <input type="text" placeholder="Title">
-        </div>
-        <div class="input_area">
-          <ion-icon name="md-person"></ion-icon>
-          <input type="text" placeholder="FirstName">
-        </div>
-        <div class="input_area">
-          <ion-icon name="md-person"></ion-icon>
-          <input type="text" placeholder="LastName">
-        </div>
-        <div class="input_area">
-            <ion-icon name="md-card"></ion-icon>
-            <input type="text" placeholder="Number ID">
+            <ion-icon name="md-person"></ion-icon>
+            <input type="text" placeholder="FirstName" formControlName="firstName">
           </div>
-        <div class="input_area">
-          <ion-icon name="md-calendar"></ion-icon>
-          <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Date of Birth"></ion-datetime>
-        </div>
-        <div class="input_area">
-          <ion-icon name="md-locate"></ion-icon>
-          <input type="text" placeholder="Address">
-        </div>        
-        <div class="input_area">
-          <ion-icon name="md-call"></ion-icon>
-          <input type="text" placeholder="Phone Number">
-        </div>      
-        <button ion-button icon-right color="primary"  round (tap)="back()">
-            ID Card
-            <ion-icon name="md-camera"></ion-icon>
-        </button>
-        <button ion-button margin-top full icon-right color="primary" round (tap)="back()">SUBMIT
-        </button>
+          <div class="input_area">
+            <ion-icon name="md-person"></ion-icon>
+            <input type="text" placeholder="LastName"  formControlName="lastName">
+          </div>
+          <div class="input_area">
+            <ion-icon name="ios-man"></ion-icon>
+            <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Date of Birth" formControlName="birthday"></ion-datetime>
+          </div>
+          <div class="input_area">
+              <ion-icon name="ios-briefcase"></ion-icon>
+              <input type="text" placeholder="metier" formControlName="metier">
+            </div>        
+          <div class="input_area">
+            <ion-icon name="md-locate"></ion-icon>
+            <input type="text" placeholder="Address" formControlName="address">
+          </div>
+          <div class="input_area">
+            <ion-icon name="md-card"></ion-icon>
+            <input type="text" placeholder="Number ID" pattern="([0-9]*)" formControlName="personalNumber">
+            <input type="hidden" formControlName="pictureProfile">
+            <input type="hidden" formControlName="picturePersonalCard">
+          </div> 
+          <button ion-button margin-top full icon-right color="primary" round type="submit" [disabled]="!personalFrom.valid">SUBMIT
+          </button>
+        </form>
       </div>
+    
 </ion-content>

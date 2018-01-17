@@ -14,3 +14,98 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+* {
+    font-family: 'Titillium Web', sans-serif;
+  }
+  
+  [ion-button] {
+    font-size: map_get($font, medium);
+    height: map_get($height, btnheight);
+  }
+  
+  .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before {
+    display: none;
+  }
+  
+  .header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios {
+    border: 0;
+  }
+  
+  .tabbar.show-tabbar {
+    border-top: 0;
+  }
+  
+  //menu
+  #menu {
+    ion-list {
+      .item {
+        &:first-child {
+          flex-direction: column !important;
+          .item-inner {
+            min-height: 19px;
+            margin-top: 16px;
+          }
+        }
+        .item-inner {
+          border: 0;
+          padding-right: 0;
+          background-image: none;
+        }
+        ion-label {
+          white-space: normal;
+          margin: 0;
+          font-weight: 200;
+        }
+        ion-thumbnail[item-left] {
+          border-radius: 100%;
+          margin: 0;
+          overflow: hidden;
+          border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+  
+  //menu end
+  
+  ion-backdrop {
+    opacity: .09;
+  }
+  
+  //animation
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale3d(.3, .3, .3);
+    }
+  
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  .item-button.button {
+    margin: auto 0;
+  }
+  
+  .text-input-wp {
+    width: 100%;
+    border: 0;
+  }
+  
+  ion-textarea {
+    transition: all 0.3s ease;
+    textarea {
+      margin: 0;
+      width: 100%;
+    }
+  }
+  
+  .box_shadow {
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.11);
+  }
+  
+  .user_comment ion-item ion-label .divide .item-button.button {
+    min-width: 30px;
+  }
+  

@@ -19,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { PersonalServiceProvider } from '../providers/personal-service/personal-service';
 import { VerifyPhonenumberServiceProvider } from '../providers/verify-phonenumber-service/verify-phonenumber-service';
 
+import { Camera } from '@ionic-native/camera';
+
+
+
 @NgModule({
   declarations: [
     MyApp
@@ -29,7 +33,7 @@ import { VerifyPhonenumberServiceProvider } from '../providers/verify-phonenumbe
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FirebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,7 +45,8 @@ import { VerifyPhonenumberServiceProvider } from '../providers/verify-phonenumbe
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TostServiceProvider,
     PersonalServiceProvider,
-    VerifyPhonenumberServiceProvider
+    VerifyPhonenumberServiceProvider,
+    Camera
   ]
 })
 export class AppModule {}

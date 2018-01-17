@@ -9,7 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class MyApp {
 
-  rootPage:string;
+  rootPage:string="AddPersonalPage";
 
   constructor(
     platform: Platform, 
@@ -19,11 +19,12 @@ export class MyApp {
   ) {
      let subscribe =  Auth.authState.subscribe(user=>{
         if(!user){
-          this.rootPage = 'LoginPage';
+          //this.rootPage = 'LoginPage';
         }else{
-          this.rootPage = 'TabPage';
+          //this.rootPage = 'TabPage';
+          localStorage.setItem('UID',user.uid);
         }
-    })
+    });
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
