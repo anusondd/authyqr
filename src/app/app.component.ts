@@ -9,7 +9,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class MyApp {
 
-  rootPage:string="AddPersonalPage";
+  rootPage:string;
+  //rootPage:string="AddPersonalPage";
 
   constructor(
     platform: Platform, 
@@ -19,9 +20,9 @@ export class MyApp {
   ) {
      let subscribe =  Auth.authState.subscribe(user=>{
         if(!user){
-          //this.rootPage = 'LoginPage';
+          this.rootPage = 'LoginPage';
         }else{
-          //this.rootPage = 'TabPage';
+          this.rootPage = 'HomePage';
           localStorage.setItem('UID',user.uid);
         }
     });

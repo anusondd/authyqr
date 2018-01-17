@@ -12,7 +12,6 @@ export class Personal {
     phoneNmener:string;
     pictureProfile:string;
     picturePersonalCard:string;
-    approvePersonal:ApprovePersonal;
 
     constructor(
         titleName:string,
@@ -25,7 +24,6 @@ export class Personal {
         phoneNmener:string,
         pictureProfile:string,
         picturePersonalCard:string,
-        approvePersonal:ApprovePersonal,
     ){
         this.titleName=titleName;
         this.firstName=firstName;
@@ -36,7 +34,6 @@ export class Personal {
         this.metier=metier;
         this.phoneNmener=phoneNmener;
         this.pictureProfile=pictureProfile;
-        this.picturePersonalCard=picturePersonalCard;
-        this.approvePersonal=approvePersonal;     
+        this.picturePersonalCard=picturePersonalCard;    
     }
 }

@@ -57,7 +57,7 @@ export class LoginPage {
                   root.popToRoot();
             }else{
                 console.log('Pass');
-                this.navCtrl.setRoot('TabPage');    
+                this.navCtrl.setRoot('HomePage');    
                 const root = this.app.getRootNav();
                   root.popToRoot();
             }            

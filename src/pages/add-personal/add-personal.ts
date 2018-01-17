@@ -9,6 +9,8 @@ import { storage ,initializeApp } from 'firebase';
 //import * as firebase from 'firebase/app';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FirebaseConfig } from '../../app/firebae-Config';
+import { ApprovePersonalServiceProvider } from '../../providers/approve-personal-service/approve-personal-service';
+import { ApprovePersonal } from '../../models/Approve-presonal';
 
 @IonicPage()
 @Component({
@@ -18,6 +20,7 @@ import { FirebaseConfig } from '../../app/firebae-Config';
 export class AddPersonalPage {
 
   personal:Personal;
+  approvePersonal:ApprovePersonal;
   personalFrom:FormGroup;
 
   pictureProfile:string='';
@@ -34,7 +37,8 @@ export class AddPersonalPage {
     private PersonalService:PersonalServiceProvider,
     public Tost:TostServiceProvider,
     public app:App,
-    public camera: Camera
+    public camera: Camera,
+    private ApprovePersonalService:ApprovePersonalServiceProvider
   ) {
     
     //initializeApp(FirebaseConfig);
@@ -89,15 +93,13 @@ export class AddPersonalPage {
   }
 
   async takePictureProfile(){
-    
-    //this.personalFrom.controls['picturePersonalCard'].setValue('data');
-    try {
+    this.loadpictureProfile();
+    /* try {
         let uid = localStorage.getItem('UID');
         const result = await this.camera.getPicture(this.options);
         const image = 'data:image/jpeg;base64,'+result;
-        const picture = storage().ref().child('images/personal/'+'token'+'.jpg');
+        const picture = storage().ref().child('images/personal/'+uid+'.jpg');
         picture.putString(image,'data_url').then(data=>{
-          this.personalFrom.controls['pictureProfile'].setValue(data.downloadURL);
           this.loadpictureProfile();
           this.Tost.presentToast('up :'+data.state);
         }).catch(e=>{
@@ -106,16 +108,18 @@ export class AddPersonalPage {
 
     }catch(error){
       this.Tost.presentToast('e :'+error);
-    }
+    } */
     
     
 
   }
 
   async loadpictureProfile(){
-    let file =  storage().ref().child('images/personal/token.jpg');
+    let uid = localStorage.getItem('UID');
+    let file =  storage().ref().child('images/personal/'+uid+'.jpg');
     await file.getDownloadURL().then(url=>{
       this.pictureProfile = url;
+      this.personalFrom.controls['pictureProfile'].setValue(url);
       console.log('Url :',url);
       this.Tost.presentToast('url :'+url);
       
@@ -123,15 +127,13 @@ export class AddPersonalPage {
   }
 
   async takePicturePersonalCard(){
-    
-    //this.personalFrom.controls['picturePersonalCard'].setValue('data');
-    try {
+    this.loadpicturePersonalCard();
+    /* try {
         let uid = localStorage.getItem('UID');
         const result = await this.camera.getPicture(this.options);
         const image = 'data:image/jpeg;base64,'+result;
-        const picture = storage().ref().child('images/personal_card/'+'token'+'.jpg');
-        picture.putString(image,'data_url').then(data=>{
-          this.personalFrom.controls['picturePersonalCard'].setValue(data.downloadURL);
+        const picture = storage().ref().child('images/personal_card/'+uid+'.jpg');
+        picture.putString(image,'data_url').then(data=>{          
           this.loadpicturePersonalCard();
           this.Tost.presentToast('up :'+data.state);
         }).catch(e=>{
@@ -140,16 +142,16 @@ export class AddPersonalPage {
 
     }catch(error){
       this.Tost.presentToast('e :'+error);
-    }
-    
-    
+    }  */ 
 
   }
 
   async loadpicturePersonalCard(){
-    let file =  storage().ref().child('images/personal_card/token.jpg');
+    let uid = localStorage.getItem('UID');
+    let file =  storage().ref().child('images/personal_card/'+uid+'.jpg');
     await file.getDownloadURL().then(url=>{
       this.picturePersonalCard = url;
+      this.personalFrom.controls['picturePersonalCard'].setValue(url);
       console.log('Url :',url);
       this.Tost.presentToast('url :'+url);
       
@@ -157,8 +159,25 @@ export class AddPersonalPage {
   }
 
   addPersonal(personalFrom:FormGroup){
+      let uid = localStorage.getItem('UID');
       this.personal =  personalFrom.value;
       console.log(this.personal);
+      this.PersonalService.updatePersonal(uid,this.personal).then(result=>{
+        console.log('sucess'+result);
+        this.Tost.presentToast('sucess'+result);
+        this.approvePersonal = new ApprovePersonal('',false,this.personal.firstName,'Request Approve');
+        this.ApprovePersonalService.addApprovePersonal(uid,this.approvePersonal).then(result=>{
+          console.log('sucess'+result);
+          this.Tost.presentToast('sucess'+result);              
+        }).catch(error=>{
+          console.log('err'+error);
+          this.Tost.presentToast('err'+error);          
+      })
+            
+      }).catch(error=>{
+          console.log('err'+error);
+          this.Tost.presentToast('err'+error);          
+      })
       
   }
 

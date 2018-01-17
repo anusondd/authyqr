@@ -100,7 +100,7 @@ export class VerifyPhonenumberPage {
                 if(verifyPhonenumber.status=="0"){ 
                   console.log('OK');
                   this.Auth.authState.subscribe(user=>{
-                      this.personal = new Personal('','','','','','','',this.number,'','',null);
+                      this.personal = new Personal('','','','','','','',this.number,'','');
                       this.PersonalService.updatePersonal(user.uid,this.personal).then(res=>{
                         this.Tost.presentToast('VerifyPhonenumber Success');
                         this.navCtrl.push('AddPersonalPage');

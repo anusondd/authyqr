@@ -20,6 +20,7 @@ import { PersonalServiceProvider } from '../providers/personal-service/personal-
 import { VerifyPhonenumberServiceProvider } from '../providers/verify-phonenumber-service/verify-phonenumber-service';
 
 import { Camera } from '@ionic-native/camera';
+import { ApprovePersonalServiceProvider } from '../providers/approve-personal-service/approve-personal-service';
 
 
 
@@ -46,7 +47,8 @@ import { Camera } from '@ionic-native/camera';
     TostServiceProvider,
     PersonalServiceProvider,
     VerifyPhonenumberServiceProvider,
-    Camera
+    Camera,
+    ApprovePersonalServiceProvider
   ]
 })
 export class AppModule {}
