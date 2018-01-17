@@ -38,13 +38,16 @@ export class AddPersonalPage {
   ) {
     
     //initializeApp(FirebaseConfig);
+    //this.loadpictureProfile();
     this.options  = {
-      quality:50,
+      quality:100,
       targetHeight:300,
       targetWidth:300,
       destinationType:this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      cameraDirection:1
     };
 
     this.personalFrom = this.formBuilder.group({
@@ -113,6 +116,40 @@ export class AddPersonalPage {
     let file =  storage().ref().child('images/personal/token.jpg');
     await file.getDownloadURL().then(url=>{
       this.pictureProfile = url;
+      console.log('Url :',url);
+      this.Tost.presentToast('url :'+url);
+      
+    });
+  }
+
+  async takePicturePersonalCard(){
+    
+    //this.personalFrom.controls['picturePersonalCard'].setValue('data');
+    try {
+        let uid = localStorage.getItem('UID');
+        const result = await this.camera.getPicture(this.options);
+        const image = 'data:image/jpeg;base64,'+result;
+        const picture = storage().ref().child('images/personal_card/'+'token'+'.jpg');
+        picture.putString(image,'data_url').then(data=>{
+          this.personalFrom.controls['picturePersonalCard'].setValue(data.downloadURL);
+          this.loadpicturePersonalCard();
+          this.Tost.presentToast('up :'+data.state);
+        }).catch(e=>{
+          this.Tost.presentToast('e :'+e);
+        });
+
+    }catch(error){
+      this.Tost.presentToast('e :'+error);
+    }
+    
+    
+
+  }
+
+  async loadpicturePersonalCard(){
+    let file =  storage().ref().child('images/personal_card/token.jpg');
+    await file.getDownloadURL().then(url=>{
+      this.picturePersonalCard = url;
       console.log('Url :',url);
       this.Tost.presentToast('url :'+url);
       

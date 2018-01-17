@@ -21,14 +21,24 @@
           <div class="image">
             <!-- <img [src]="assets/img/user-icon.png" *ngIf="base64Image"/> -->
             <img *ngIf="pictureProfile==''" src="assets/img/user-icon.png" />
-            <img *ngIf="pictureProfile!=''" src="{{pictureProfile}}|async" />
+            <img *ngIf="pictureProfile!=''" src="{{pictureProfile}}|async" />  
           </div>
           <button ion-button round outline color=primary (click)="takePictureProfile()">
             <ion-icon name="md-camera"></ion-icon>
           </button>
         </div>
+        <div class="card-pic-change">
+            <div class="image_rotate" (click)="takePicturePersonalCard()">
+              <!-- <img [src]="assets/img/user-icon.png" *ngIf="base64Image"/> -->
+              <img *ngIf="picturePersonalCard==''" src="assets/img/idCard.png" />
+              <img *ngIf="picturePersonalCard!=''" src="{{picturePersonalCard}}|async" />  
+            </div>
+            <!-- <button ion-button round outline color=primary (click)="takePicturePersonalCard()">
+              <ion-icon name="md-camera"></ion-icon>
+            </button> -->
+        </div>
         <form [formGroup]="personalFrom" (ngSubmit)="addPersonal(personalFrom)">
-        <div class="input_area">
+        <div class="input_area"> 
             <ion-icon name="md-people"></ion-icon>
             <ion-select interface="action-sheet" placeholder="Select gender" formControlName="titleName">
               <ion-option>Mr.</ion-option>
