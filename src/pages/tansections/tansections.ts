@@ -38,6 +38,7 @@ export class TansectionsPage {
   logOut(){
     this.Auth.auth.signOut().then(result=>{
         console.log('pass',result);
+        localStorage.clear();
         this.navCtrl.setRoot('LoginPage');    
         const root = this.app.getRootNav();
               root.popToRoot();

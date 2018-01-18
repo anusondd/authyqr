@@ -69,7 +69,7 @@
           </div>
           <div class="input_area">
             <ion-icon name="md-card"></ion-icon>
-            <input type="text" placeholder="Number ID" pattern="([0-9]*)" formControlName="personalNumber">
+            <input type="text" placeholder="Number ID" pattern="([0-9]*)" formControlName="personalNumber" (keyup)="checkPersonalNumber()">
             <input type="hidden" formControlName="pictureProfile">
             <input type="hidden" formControlName="picturePersonalCard">
           </div> 

@@ -12,6 +12,58 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-card>
+        <img src="assets/img/logo.svg"/>
+        <ion-card-content>
+          <ion-card-title>
+            Nine Inch Nails Live
+            </ion-card-title>
+          <p>
+            The most popular industrial group ever, and largely
+            responsible for bringing the music to a mass audience.
+          </p>
+        </ion-card-content>
+      </ion-card>
+    <div *ngIf="statusApprove" class="slider_area">
+        <ion-slides pager [autoplay]="2500">
+          <ion-slide>
+            <div class="slider_content">
+              <img class="logo" src="assets/img/addfriends.svg">
+              <h3>Welcome!</h3>
+              <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
+            </div>
+          </ion-slide>
+    
+          <ion-slide>
+            <div class="slider_content">
+              <img class="specification_img" src="assets/img/addfriends.svg">
+              <h3>Add Friends!</h3>
+              <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
+            </div>
+          </ion-slide>
+    
+          <ion-slide>
+            <div class="slider_content">
+              <img class="specification_img" src="assets/img/acceptfriend.svg">
+              <h3>Accept request!</h3>
+              <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
+            </div>
+          </ion-slide>
+    
+          <ion-slide>
+            <div class="slider_content">
+              <img class="specification_img" src="assets/img/chat.svg">
+              <h3>Let's chat!</h3>
+              <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
+            </div>
+          </ion-slide>
+    
+        </ion-slides>
+      </div>
+      <div class="button_section">
+        <button ion-button color="primary" outline round (tap)="gotologin()">Get started</button>
+      </div>
+  
 
 </ion-content>

@@ -19,6 +19,7 @@ export class VerifyPhonenumberPage {
   id='';
   personal:Personal;
   number:string;
+  message:string;
   
   
 
@@ -40,18 +41,38 @@ export class VerifyPhonenumberPage {
           Validators.minLength(10), 
           Validators.maxLength(10)
         ])
-      ]
-    })
+      ],
+      check:['',Validators.compose([Validators.required])]
+    });
+
     
+    
+  }
+
+  checkNumber(){
+    this.number = this.phoneNumber.controls['number'].value;
+    console.log(this.number);
+    this.PersonalService.searchPhonenumber(this.number).subscribe(person=>{
+      if(person.length>0){
+        console.log('person',person);
+        this.phoneNumber.controls['check'].setValue('');
+        this.message = 'This phone number is already used.';
+      }else{
+        console.log('person = 0',person);
+        this.phoneNumber.controls['check'].setValue('pass');
+        this.message = '';
+      }      
+      
+    });
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VerifyPhonenumberPage');
-        
   }
 
   sendOTP(phoneNumber:FormGroup){
-    let Numberp = phoneNumber.value;
+    let Numberp = this.phoneNumber.value;
     let sub = Numberp.number;
     this.number = Numberp.number;
     let str = sub.substring(1, 10);
@@ -124,6 +145,7 @@ export class VerifyPhonenumberPage {
   logOut(){
     this.Auth.auth.signOut().then(result=>{
         console.log('pass',result);
+        localStorage.clear();
         this.navCtrl.setRoot('LoginPage');    
         const root = this.app.getRootNav();
               root.popToRoot();

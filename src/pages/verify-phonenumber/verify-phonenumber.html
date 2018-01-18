@@ -18,10 +18,12 @@
         <div class="image">
           <img src="assets/img/phone.png" />
         </div>
+        <p color="danger">{{message}}</p>
     <form [formGroup]="phoneNumber" (ngSubmit)="sendOTP(phoneNumber)">
       <div class="input_area">
         <ion-icon name="md-call"></ion-icon>
-        <input type="tel" placeholder="0912345678" formControlName="number" pattern="([0-9]*)">
+        <input type="tel" placeholder="0912345678" formControlName="number" pattern="([0-9]*)" (keyup)="checkNumber()">
+        <!-- <input type="hidden" formControlName="check"> -->
       </div>
       <button ion-button margin-top full icon-right color="primary" round type="submit" [disabled]="!phoneNumber.valid">
         Send OTP

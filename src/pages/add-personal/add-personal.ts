@@ -27,7 +27,7 @@ export class AddPersonalPage {
   picturePersonalCard:string='';
 
   options:CameraOptions;
-
+  message:string;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -85,6 +85,7 @@ export class AddPersonalPage {
     ],
     pictureProfile:['',Validators.compose([Validators.required])],
     picturePersonalCard:['',Validators.compose([Validators.required])],
+    check:['',Validators.compose([Validators.required])],
     })
   }
 
@@ -92,9 +93,27 @@ export class AddPersonalPage {
     console.log('ionViewDidLoad AddPersonalPage');
   }
 
+  checkPersonalNumber(){
+
+    let personalNumber =  this.personalFrom.controls['personalNumber'].value;
+    console.log(personalNumber);
+    
+    this.PersonalService.searchPersonalNumber(personalNumber).subscribe(person=>{
+      if(person.length>0){
+        console.log('person',person);
+        this.personalFrom.controls['check'].setValue('');
+        this.message = 'This PersonalNumber is already used.';
+      }else{
+        console.log('person = 0',person);
+        this.personalFrom.controls['check'].setValue('pass');
+        this.message = '';
+      } 
+    })
+  }
+
   async takePictureProfile(){
-    this.loadpictureProfile();
-    /* try {
+    //this.loadpictureProfile();
+    try {
         let uid = localStorage.getItem('UID');
         const result = await this.camera.getPicture(this.options);
         const image = 'data:image/jpeg;base64,'+result;
@@ -108,7 +127,7 @@ export class AddPersonalPage {
 
     }catch(error){
       this.Tost.presentToast('e :'+error);
-    } */
+    }
     
     
 
@@ -127,8 +146,8 @@ export class AddPersonalPage {
   }
 
   async takePicturePersonalCard(){
-    this.loadpicturePersonalCard();
-    /* try {
+    //this.loadpicturePersonalCard();
+    try {
         let uid = localStorage.getItem('UID');
         const result = await this.camera.getPicture(this.options);
         const image = 'data:image/jpeg;base64,'+result;
@@ -142,7 +161,7 @@ export class AddPersonalPage {
 
     }catch(error){
       this.Tost.presentToast('e :'+error);
-    }  */ 
+    }  
 
   }
 
@@ -168,7 +187,10 @@ export class AddPersonalPage {
         this.approvePersonal = new ApprovePersonal('',false,this.personal.firstName,'Request Approve');
         this.ApprovePersonalService.addApprovePersonal(uid,this.approvePersonal).then(result=>{
           console.log('sucess'+result);
-          this.Tost.presentToast('sucess'+result);              
+          this.Tost.presentToast('sucess'+result); 
+          this.navCtrl.setRoot('HomePage');    
+          const root = this.app.getRootNav();
+                root.popToRoot();             
         }).catch(error=>{
           console.log('err'+error);
           this.Tost.presentToast('err'+error);          
@@ -184,6 +206,7 @@ export class AddPersonalPage {
   logOut(){
     this.Auth.auth.signOut().then(result=>{
         console.log('pass',result);
+        localStorage.clear();        
         this.navCtrl.setRoot('LoginPage');    
         const root = this.app.getRootNav();
               root.popToRoot();

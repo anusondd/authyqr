@@ -13,6 +13,8 @@ import { ApprovePersonalServiceProvider } from '../../providers/approve-personal
 })
 export class HomePage {
 
+  statusApprove:boolean;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -41,6 +43,7 @@ export class HomePage {
         }else{
             this.ApprovePersonalService.getApprovePersonal(uid).subscribe(approve=>{
                 console.log('Approve',approve);
+                this.statusApprove = approve.statusApprove;
                 
             })
         }            
@@ -55,6 +58,7 @@ export class HomePage {
   logOut(){
     this.Auth.auth.signOut().then(result=>{
         console.log('pass',result);
+        localStorage.clear();
         this.navCtrl.setRoot('LoginPage');    
         const root = this.app.getRootNav();
               root.popToRoot();

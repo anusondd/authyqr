@@ -1,3 +1,56 @@
 page-home {
+    .scroll-content {
+        display: flex;
+        flex-direction: column;
+        .slider_area {
+          flex: 4;
+          .swiper-pagination-bullet {
+            background-color: map_get($colors, extralight);
+          }
+          ion-slides {
+            ion-slide {
+              background-color: map_get($colors, primary);
+              .slider_content {
+                padding: map_get($padding, sixteen);
+                .logo {
+                  width: map_get($width, logo);
+                  margin-bottom: map_get($margin, big);
+                }
+                .specification_img {
+                  width: 70%;
+                  margin-bottom: map_get($margin, medium);
+                }
+    
+                h3 {
+                  text-transform: capitalize;
+                  color: map_get($colors, extralight);
+                  font-size: map_get($font, big);
+                }
+                small {
+                  color: map_get($colors, light);
+                  font-size: map_get($font, small);
+                }
+              }
+            }
+          }
+          .skip_btn {
+            text-decoration: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            font-size: map_get($font, small);
+          }
+        }
+        .button_section {
+          padding: 16px;
+          flex: 1;
+          display: flex;
+          .button {
+            width: 100%;
+            margin: auto;
+          }
+        }
+      }
 
 }
