@@ -44,6 +44,11 @@ export class HomePage {
             this.ApprovePersonalService.getApprovePersonal(uid).subscribe(approve=>{
                 console.log('Approve',approve);
                 this.statusApprove = approve.statusApprove;
+                if(approve.statusApprove==true){
+                  this.navCtrl.setRoot('TabPage');    
+                  const root = this.app.getRootNav();
+                  root.popToRoot();
+                }
                 
             })
         }            

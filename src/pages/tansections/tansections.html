@@ -8,12 +8,17 @@
 
   <ion-navbar>
     <ion-title>tansections</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="logOut()">
+        <ion-icon name="md-exit"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-button (click)="logOut()" >Logout</button>
+  <!-- <button ion-button (click)="logOut()" >Logout</button> -->
 
 </ion-content>
