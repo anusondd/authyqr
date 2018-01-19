@@ -1,18 +1,900 @@
-<!--
-  Generated template for the PersonalPage page.
+<ion-content>
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Profile</ion-title>
+      <ion-buttons right>
+          <button ion-button icon-only color="royal" (click)="logOut()">
+            <ion-icon name="md-exit"></ion-icon>
+          </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div class="card-background-page">
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <ion-card>
+      <img src="assets/img/cover.png"/>
+      <div class="bg_curve"></div>
 
-  <ion-navbar>
-    <ion-title>personal</ion-title>
-  </ion-navbar>
+      <ion-buttons right class="update_btn">
+        <button ion-button clear icon-only color="light" text-capitalize navPush="UpdatePersonalPage">
+          <ion-icon name="ios-create"></ion-icon> Update
+        </button>
+      </ion-buttons>
+    </ion-card>
+    <div class="profile_picture_area">
 
-</ion-header>
+      <div class="follow">
+        <h3>502</h3>
+        <p>Follower</p>
+      </div>
+
+      <ion-avatar>
+        <img src="{{personal.pictureProfile}}"/>
+      </ion-avatar>
+      <div class="follow">
+        <h3>485</h3>
+        <p>Following</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="user_details">
+    <h2 class="name">{{personal.titleName}} {{personal.firstName}} {{personal.lastName}}</h2>
+    <span class="address">{{personal.metier}}</span>
+    <div class="profile_status">
+      <ion-segment [(ngModel)]="profile">
+        <ion-segment-button value="about">
+          Personal
+        </ion-segment-button>
+        <!-- <ion-segment-button value="mypost">
+          Mypost
+        </ion-segment-button> -->
+        <!-- <ion-segment-button value="friends">
+          Friends
+        </ion-segment-button> -->
+        <ion-segment-button value="follower">
+          Follower
+        </ion-segment-button>
+      </ion-segment>
+
+    </div>
 
 
-<ion-content padding>
+    <div [ngSwitch]="profile">
+      <ion-list padding no-margin *ngSwitchCase="'about'" class="about">
+        <ion-item no-lines>
+              <ion-icon name="md-person" item-start color="lightdark"></ion-icon>
+              <p>Name </p>
+              <h2>{{personal.titleName}} {{personal.firstName}} {{personal.lastName}}</h2>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-icon name="ios-call-outline" item-start color="lightdark"></ion-icon>
+          <p>Mobile</p>
+          <h2>{{personal.phoneNumber}}</h2>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-icon name="ios-home-outline" item-start color="lightdark"></ion-icon>
+          <p>Address</p>
+          <h2>{{personal.address}}</h2>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-icon name="ios-happy-outline" item-start color="lightdark"></ion-icon>
+          <p>Birthday</p>
+          <h2>{{personal.birthday}}</h2>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-icon name="ios-briefcase" item-start color="lightdark"></ion-icon>
+          <p>Metier</p>
+          <h2>{{personal.metier}}</h2>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-icon name="md-card" item-start color="lightdark"></ion-icon>
+          <p>Number ID</p>
+          <h2>{{personal.personalNumber}}</h2>
+        </ion-item>
+      </ion-list>
+
+      <ion-list padding no-margin *ngSwitchCase="'mypost'" class="mypost">
+        <ion-card>
+
+          <ion-item no-padding>
+            <ion-avatar item-start>
+              <img src="assets/img/profile-img.jpg"/>
+            </ion-avatar>
+            <div class="post_user_details">
+              <h2>Marty McFly</h2>
+              <p>November 5, 1955</p>
+            </div>
+            <button ion-button clear icon-only color="bordercolor" (tap)="postpopover($event)">
+              <ion-icon name='ios-arrow-down-outline'></ion-icon>
+            </button>
+          </ion-item>
+
+          <img src="assets/img/post1.png"/>
+
+          <ion-card-content>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta eos exercitationem iure, quaerat
+              recusandae!</p>
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                11h ago
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
+        <ion-card>
+
+          <ion-item no-padding>
+            <ion-avatar item-start>
+              <img src="assets/img/profile-img.jpg"/>
+            </ion-avatar>
+            <div class="post_user_details">
+              <h2>Marty McFly</h2>
+              <p>November 5, 1955</p>
+            </div>
+            <button ion-button clear icon-only color="bordercolor" (tap)="postpopover($event)">
+              <ion-icon name='ios-arrow-down-outline'></ion-icon>
+            </button>
+          </ion-item>
+
+          <img src="assets/img/post2.png"/>
+
+          <ion-card-content>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta eos exercitationem iure, quaerat
+              recusandae!</p>
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                11h ago
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
+        <ion-card>
+
+          <ion-item no-padding>
+            <ion-avatar item-start>
+              <img src="assets/img/profile-img.jpg"/>
+            </ion-avatar>
+            <div class="post_user_details">
+              <h2>Marty McFly</h2>
+              <p>November 5, 1955</p>
+            </div>
+            <button ion-button clear icon-only color="bordercolor" (tap)="postpopover($event)">
+              <ion-icon name='ios-arrow-down-outline'></ion-icon>
+            </button>
+          </ion-item>
+
+          <img src="assets/img/cover.png"/>
+
+          <ion-card-content>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta eos exercitationem iure, quaerat
+              recusandae!</p>
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>12 Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>4 Comments</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                11h ago
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
+      </ion-list>
+
+      <ion-list padding no-margin *ngSwitchCase="'friends'" class="friends">
+        <ion-item no-lines margin-bottom>
+          <ion-icon name="people" item-start margin-right></ion-icon>
+          <span margin-left>Now You have 12 friends</span>
+        </ion-item>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user1.jpg">
+            </ion-avatar>
+            <h2>Breno Ribeiro</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user2.jpg">
+            </ion-avatar>
+            <h2>Deborah Brent</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user3.jpg">
+            </ion-avatar>
+            <h2>Alan Dillard</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user4.jpg">
+            </ion-avatar>
+            <h2>Russell Starnes</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user5.jpg">
+            </ion-avatar>
+            <h2>Sean Porch</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user6.jpg">
+            </ion-avatar>
+            <h2>Carol White</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user1.jpg">
+            </ion-avatar>
+            <h2>Breno Ribeiro</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user2.jpg">
+            </ion-avatar>
+            <h2>Deborah Brent</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user3.jpg">
+            </ion-avatar>
+            <h2>Alan Dillard</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user4.jpg">
+            </ion-avatar>
+            <h2>Russell Starnes</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user5.jpg">
+            </ion-avatar>
+            <h2>Sean Porch</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user6.jpg">
+            </ion-avatar>
+            <h2>Carol White</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+      <ion-list padding no-margin *ngSwitchCase="'follower'" class="follower">
+        <ion-item no-lines margin-bottom>
+          <ion-icon name="md-person-add" item-start></ion-icon>
+          <span margin-left>Now You have 12 follower</span>
+        </ion-item>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user1.jpg">
+            </ion-avatar>
+            <h2>Breno Ribeiro</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user2.jpg">
+            </ion-avatar>
+            <h2>Deborah Brent</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user3.jpg">
+            </ion-avatar>
+            <h2>Alan Dillard</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user4.jpg">
+            </ion-avatar>
+            <h2>Russell Starnes</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user5.jpg">
+            </ion-avatar>
+            <h2>Sean Porch</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user6.jpg">
+            </ion-avatar>
+            <h2>Carol White</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user1.jpg">
+            </ion-avatar>
+            <h2>Breno Ribeiro</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user2.jpg">
+            </ion-avatar>
+            <h2>Deborah Brent</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user3.jpg">
+            </ion-avatar>
+            <h2>Alan Dillard</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user4.jpg">
+            </ion-avatar>
+            <h2>Russell Starnes</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user5.jpg">
+            </ion-avatar>
+            <h2>Sean Porch</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user6.jpg">
+            </ion-avatar>
+            <h2>Carol White</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item no-lines margin-vertical>
+          <ion-icon name="md-person-add" item-start></ion-icon>
+          You follow 12 people
+        </ion-item>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user1.jpg">
+            </ion-avatar>
+            <h2>Breno Ribeiro</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user2.jpg">
+            </ion-avatar>
+            <h2>Deborah Brent</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user3.jpg">
+            </ion-avatar>
+            <h2>Alan Dillard</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user4.jpg">
+            </ion-avatar>
+            <h2>Russell Starnes</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user5.jpg">
+            </ion-avatar>
+            <h2>Sean Porch</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user6.jpg">
+            </ion-avatar>
+            <h2>Carol White</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user1.jpg">
+            </ion-avatar>
+            <h2>Breno Ribeiro</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user2.jpg">
+            </ion-avatar>
+            <h2>Deborah Brent</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user3.jpg">
+            </ion-avatar>
+            <h2>Alan Dillard</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user4.jpg">
+            </ion-avatar>
+            <h2>Russell Starnes</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user5.jpg">
+            </ion-avatar>
+            <h2>Sean Porch</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+        <ion-item-sliding>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="assets/img/user6.jpg">
+            </ion-avatar>
+            <h2>Carol White</h2>
+          </ion-item>
+          <ion-item-options no-border>
+            <button ion-button color="primary" icon-start>
+              <ion-icon name="text"></ion-icon>
+              Text
+            </button>
+            <button ion-button color="secondary" icon-start>
+              <ion-icon name="call"></ion-icon>
+              Call
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+
+    </div>
+
+  </div>
 
 </ion-content>
+

@@ -1,3 +1,301 @@
 page-personal {
 
+  .toolbar-md-primary .toolbar-background-md {
+    background: transparent !important;
+  }
+  .card-background-page {
+    position: relative;
+    ion-card {
+      position: relative;
+      text-align: center;
+      margin: 0;
+      width: 100%;
+      box-shadow: none;
+      overflow: visible;
+      &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: black;
+        opacity: 0.4;
+        content: '';
+      }
+      .bg_curve {
+        position: absolute;
+        bottom: -80px;
+        right: -55px;
+        left: -55px;
+        height: 110px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        z-index: 1;
+      }
+      .update_btn{
+        position: absolute;
+        bottom: 16px;
+        right: 4px;
+        z-index: 3;
+        ion-icon{
+          font-size: map_get($font, small);
+        }
+      }
+    }
+    .profile_picture_area {
+      z-index: 2;
+      position: absolute;
+      bottom: -38px;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex: 2;
+      ion-avatar {
+        height: 13rem;
+        width: 13rem;
+        overflow: hidden;
+        border-radius: 100%;
+        margin: auto;
+        order: 2;
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.11);
+        animation-name: zoomIn;
+        animation-duration: .5s;
+        animation-fill-mode: both;
+        img {
+          width: 100%;
+        }
+      }
+      .follow {
+        align-self: flex-end;
+        text-align: center;
+        flex: 1;
+        color: map_get($colors, dark);
+        &:first-child {
+          order: 1;
+        }
+        &:last-child{
+          order: 2;
+        }
+        h3{
+          margin: 0;
+        }
+        p{
+          margin: 0;
+        }
+      }
+    }
+  }
+  .user_details {
+    position: relative;
+    top: 45px;
+    z-index: 1;
+    text-align: center;
+    .profile_status {
+      margin-top: 16px;
+      padding: 8px;
+      ion-segment {
+        font-size: map_get($font, bitsmall);
+      }
+    }
+    .name {
+      color: map_get($colors, primary);
+      margin-bottom: 0.5rem;
+    }
+    .address {
+      color: map_get($colors, lightdark);
+      text-transform: capitalize;
+    }
+    .about {
+      .item {
+        padding-left: 0;
+        color: map_get($colors, lightdark);
+        min-height: inherit;
+        &:last-child ion-label {
+          margin-bottom: 0;
+        }
+        p {
+          line-height: 2rem;
+          white-space: normal;
+        }
+        h2 {
+          font-size: map_get($font, bitsmall);
+          font-weight: 200;
+          line-height: 2rem;
+        }
+        .item-inner {
+          padding-right: 0;
+          margin-left: 24px;
+
+        }
+        ion-label {
+          white-space: normal;
+          margin: 0 0 16px 0;
+        }
+        ion-icon {
+          align-self: flex-start;
+          margin: 0;
+        }
+      }
+    }
+    .mypost {
+      background-color: map_get($colors, lightbg);
+      ion-card {
+        width: 100%;
+        margin: 0;
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.11);
+        margin-bottom: 16px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        ion-row {
+          border-top: 1px solid map_get($colors, bordercolor);
+          ion-col {
+            padding: 0;
+            display: flex;
+            .button {
+              margin: 0;
+              text-transform: capitalize;
+              padding: 0 0.5em;
+              font-size: map_get($font, bitsmall);
+            }
+            ion-note {
+              margin: auto;
+            }
+          }
+        }
+        ion-label {
+          display: flex;
+          justify-content: space-between;
+          margin: auto 0;
+          .post_user_details {
+            overflow: hidden;
+          }
+          .button {
+            width: 40px;
+          }
+        }
+
+      }
+      ion-item {
+        padding: 8px;
+        .item-inner {
+          padding-right: 0;
+          ion-label {
+            margin: auto 0;
+          }
+        }
+      }
+      ion-card-content {
+        padding: 8px;
+        p {
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .friends {
+
+    ion-item-sliding {
+      border-bottom: 1px solid map_get($colors, bg);
+      &:last-child {
+        border-bottom: none;
+      }
+      ion-item {
+        margin-bottom: 0;
+        ion-label {
+          margin: auto;
+          color: map_get($colors, dark);
+          h2 {
+            font-size: map_get($font, small);
+            font-weight: 500;
+          }
+        }
+      }
+      ion-item-options {
+        border-bottom: 0;
+      }
+    }
+    .item {
+      padding-left: 0;
+      color: map_get($colors, lightdark);
+      min-height: inherit;
+      &:last-child ion-label {
+        margin-bottom: 0;
+      }
+      p {
+        line-height: 2rem;
+        white-space: normal;
+      }
+      h2 {
+        font-size: map_get($font, bitsmall);
+        font-weight: 200;
+        line-height: 2rem;
+      }
+      .item-inner {
+        padding-right: 0;
+      }
+      ion-label {
+        white-space: normal;
+        margin: auto;
+      }
+      ion-icon {
+        align-self: flex-start;
+        margin: 0;
+      }
+    }
+  }
+
+  .follower {
+
+    ion-item-sliding {
+      border-bottom: 1px solid map_get($colors, bg);
+      &:last-child {
+        border-bottom: none;
+      }
+      ion-item {
+        margin-bottom: 0;
+        ion-label {
+          margin: auto;
+          color: map_get($colors, dark);
+          h2 {
+            font-size: map_get($font, small);
+            font-weight: 500;
+          }
+        }
+      }
+      ion-item-options {
+        border-bottom: 0;
+      }
+    }
+    .item {
+      padding-left: 0;
+      color: map_get($colors, lightdark);
+      min-height: inherit;
+      &:last-child ion-label {
+        margin-bottom: 0;
+      }
+      p {
+        line-height: 2rem;
+        white-space: normal;
+      }
+      h2 {
+        font-size: map_get($font, bitsmall);
+        font-weight: 200;
+        line-height: 2rem;
+      }
+      .item-inner {
+        padding-right: 0;
+      }
+      ion-label {
+        white-space: normal;
+        margin: auto;
+      }
+      ion-icon {
+        align-self: flex-start;
+        margin: 0;
+      }
+    }
+  }
+
 }

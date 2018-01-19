@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { ApprovePersonalServiceProvider } from '../../providers/approve-personal-service/approve-personal-service';
+import { FormBuilder } from '@angular/forms';
 
 
 @IonicPage()
@@ -18,8 +19,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    //private formBuilder: FormBuilder,
-    //private VerifyPhonenumber:VerifyPhonenumberServiceProvider,
+    private formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     private Auth:AngularFireAuth,
     private PersonalService:PersonalServiceProvider,
@@ -29,7 +29,7 @@ export class HomePage {
   ) {
     let uid = localStorage.getItem('UID');
     this.PersonalService.getPersonal(uid).subscribe(user=>{
-      if(user.phoneNmener==''){
+      if(user.phoneNumber==''){
         console.log('toVerifyPhonenumber');
         this.navCtrl.setRoot('VerifyPhonenumberPage');    
         const root = this.app.getRootNav();

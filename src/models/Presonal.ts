@@ -9,7 +9,7 @@ export class Personal {
     address:string;
     personalNumber:string;
     metier:string;
-    phoneNmener:string;
+    phoneNumber:string;
     pictureProfile:string;
     picturePersonalCard:string;
 
@@ -21,7 +21,7 @@ export class Personal {
         address:string,
         personalNumber:string,
         metier:string,
-        phoneNmener:string,
+        phoneNumber:string,
         pictureProfile:string,
         picturePersonalCard:string,
     ){
@@ -32,7 +32,7 @@ export class Personal {
         this.address=address;
         this.personalNumber=personalNumber;
         this.metier=metier;
-        this.phoneNmener=phoneNmener;
+        this.phoneNumber=phoneNumber;
         this.pictureProfile=pictureProfile;
         this.picturePersonalCard=picturePersonalCard;    
     }

@@ -35,7 +35,7 @@ export class RegisterPage {
     address:'',
     personalNumber:'',
     metier:'',
-    phoneNmener:'',
+    phoneNumber:'',
     pictureProfile:'',
     picturePersonalCard:'',
     approvePersonal:''

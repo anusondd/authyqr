@@ -1,0 +1,77 @@
+
+<ion-header>
+
+    <ion-navbar color="primary">
+      <ion-title>Update personal</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="royal" (click)="logOut()">
+              <ion-icon name="md-exit"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+      
+      <div class="center_screen">
+          
+          <div class="pro-pic-change">
+            <div class="image">
+              <img *ngIf="pictureProfile==''" src="assets/img/user-icon.png" />
+              <img *ngIf="pictureProfile!=''" src="{{pictureProfile}}|async" />  
+            </div>
+            <button ion-button round outline color=primary (click)="takePictureProfile()">
+              <ion-icon name="md-camera"></ion-icon>
+            </button>
+          </div>
+          <div class="card-pic-change">
+              <div class="image_rotate" (click)="takePicturePersonalCard()">
+                <img *ngIf="picturePersonalCard==''" src="assets/img/idCard.png" />
+                <img *ngIf="picturePersonalCard!=''" src="{{picturePersonalCard}}|async" />  
+              </div>
+          </div>
+          <form [formGroup]="personalFrom" (ngSubmit)="updatePersonal(personalFrom)">
+          <div class="input_area"> 
+              <ion-icon name="md-people"></ion-icon>
+              <ion-select interface="action-sheet" placeholder="Select gender" formControlName="titleName">
+                <ion-option>Mr.</ion-option>
+                <ion-option>Miss</ion-option>
+                <ion-option>Mrs.</ion-option>
+              </ion-select>
+          </div>
+      
+          <div class="input_area">
+              <ion-icon name="md-person"></ion-icon>
+              <input type="text" placeholder="FirstName" formControlName="firstName">
+            </div>
+            <div class="input_area">
+              <ion-icon name="md-person"></ion-icon>
+              <input type="text" placeholder="LastName"  formControlName="lastName">
+            </div>
+            <div class="input_area">
+              <ion-icon name="ios-man"></ion-icon>
+              <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Date of Birth" formControlName="birthday"></ion-datetime>
+            </div>
+            <div class="input_area">
+                <ion-icon name="ios-briefcase"></ion-icon>
+                <input type="text" placeholder="metier" formControlName="metier">
+              </div>        
+            <div class="input_area">
+              <ion-icon name="md-locate"></ion-icon>
+              <input type="text" placeholder="Address" formControlName="address">
+            </div>
+            <div class="input_area">
+              <ion-icon name="md-card"></ion-icon>
+              <input type="text" placeholder="Number ID" pattern="([0-9]*)" formControlName="personalNumber" (keyup)="checkPersonalNumber()">
+              <input type="hidden" formControlName="pictureProfile">
+              <input type="hidden" formControlName="picturePersonalCard">
+            </div> 
+            <button ion-button margin-top full icon-right color="primary" round type="submit" [disabled]="!personalFrom.valid"> SUBMIT
+            </button>
+          </form>
+        </div>
+      
+  </ion-content>
+  

@@ -43,8 +43,8 @@ export class LoginPage {
       this.Auth.auth.signInWithEmailAndPassword(user.email,user.password).then(result=>{
         console.log('pass',result.uid);
         this.PersonalService.getPersonal(result.uid).subscribe(res=>{
-          console.log(res.phoneNmener);
-          if(res.phoneNmener==''){
+          console.log(res.phoneNumber);
+          if(res.phoneNumber==''){
             console.log('toVerifyPhonenumber');
             this.navCtrl.setRoot('VerifyPhonenumberPage');    
             const root = this.app.getRootNav();
