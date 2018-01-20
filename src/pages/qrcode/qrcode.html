@@ -1,9 +1,4 @@
-<!--
-  Generated template for the QrcodePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -14,5 +9,18 @@
 
 
 <ion-content padding>
+  <div *ngIf="results">
+        <p>{{results.text}}</p>
+        <p>{{results.format}}</p>
+        <p>{{results.cancelled}}</p>
+    </div>
+
+    <h1 *ngIf="qrcodeId">youId : {{qrcodeId}}</h1>
+    <button ion-button color="dark" full round (click)="scan()">
+        <ion-icon name="camera"></ion-icon>Scan QRcode        
+    </button>
+    <button ion-button color="dark"  full round (click)="endCode()">
+        <ion-icon name="barcode"></ion-icon>Show QRcode
+    </button>
 
 </ion-content>

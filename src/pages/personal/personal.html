@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content *ngIf="personal">
   <ion-header>
     <ion-toolbar color="primary">
       <ion-title>Profile</ion-title>
@@ -25,7 +25,7 @@
 
       <div class="follow">
         <h3>502</h3>
-        <p>Follower</p>
+        <p>Request</p>
       </div>
 
       <ion-avatar>
@@ -33,7 +33,7 @@
       </ion-avatar>
       <div class="follow">
         <h3>485</h3>
-        <p>Following</p>
+        <p>Approve</p>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@
           Friends
         </ion-segment-button> -->
         <ion-segment-button value="follower">
-          Follower
+          My Tansection
         </ion-segment-button>
       </ion-segment>
 
