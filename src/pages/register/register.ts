@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../../models/User';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { Personal } from '../../models/Presonal';
+import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
 
 @IonicPage()
 @Component({
@@ -19,6 +21,7 @@ export class RegisterPage {
     public Tost:TostServiceProvider,
     private Database:AngularFireDatabase,
     public app:App,
+    private personalService:PersonalServiceProvider
   ) {
   }
 
@@ -27,28 +30,17 @@ export class RegisterPage {
     password:'21519097'
   };
   massage:string;
-  person={
-    titleName:'',
-    firstName:'',
-    lastName:'',
-    birthday:'',
-    address:'',
-    personalNumber:'',
-    metier:'',
-    phoneNumber:'',
-    pictureProfile:'',
-    picturePersonalCard:'',
-    approvePersonal:''
-  };
+  person:Personal;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
 
   register(user:User){
-    this.Auth.auth.createUserWithEmailAndPassword(user.email,user.password).then(result=>{
-      console.log('pass',result)
-      this.Database.object('personal/'+result.uid).set(this.person).then(result=>{})
+    this.Auth.auth.createUserWithEmailAndPassword(user.email,user.password).then(user=>{
+      console.log('pass',user)
+      this.person = new Personal('','','','','','','','','','',user.uid,'');
+      this.personalService.addPersonal(user.uid,this.person).then(result=>{})
       this.navCtrl.setRoot('LoginPage');    
         const root = this.app.getRootNav();
               root.popToRoot();

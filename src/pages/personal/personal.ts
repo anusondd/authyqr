@@ -17,6 +17,7 @@ import { Personal } from '../../models/Presonal';
 export class PersonalPage {
 
   personal:Personal;
+  profile: string = "about";
 
   constructor(
     public navCtrl: NavController, 

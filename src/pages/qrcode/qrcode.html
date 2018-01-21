@@ -9,11 +9,11 @@
 
 
 <ion-content padding>
-  <div *ngIf="results">
+    <!-- <div *ngIf="results">
         <p>{{results.text}}</p>
         <p>{{results.format}}</p>
         <p>{{results.cancelled}}</p>
-    </div>
+    </div> -->
 
     <h1 *ngIf="qrcodeId">youId : {{qrcodeId}}</h1>
     <button ion-button color="dark" full round (click)="scan()">

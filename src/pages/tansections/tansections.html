@@ -1,13 +1,16 @@
-<!--
-  Generated template for the TansectionsPage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>tansections</ion-title>
+    <!-- <ion-title>tansections</ion-title> -->
+    <ion-segment [(ngModel)]="friends" color="extralight">
+      <ion-segment-button value="add">
+        Request
+      </ion-segment-button>
+      <ion-segment-button value="request">
+        Approve
+      </ion-segment-button>
+    </ion-segment>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="logOut()">
         <ion-icon name="md-exit"></ion-icon>
@@ -19,6 +22,56 @@
 
 
 <ion-content padding>
-  <!-- <button ion-button (click)="logOut()" >Logout</button> -->
+  <div [ngSwitch]="friends">
+    <ion-list no-margin *ngSwitchCase="'add'">
+
+      <ion-item-sliding *ngFor="let tansection of tansectionsRequest">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{tansection.personal_approve.pictureProfile}}">
+          </ion-avatar>
+          <h2>Requested : {{tansection.personal_approve.titleName}} {{tansection.personal_approve.firstName}}</h2>
+          <p> Detail : {{tansection.personal_request.titleName}} {{tansection.personal_request.firstName}} Request
+              {{tansection.personal_approve.titleName}} {{tansection.personal_approve.firstName}}
+          </p>
+          <p>Status : {{tansection.status_tansection}}</p>
+        </ion-item>
+        <ion-item-options side="right" *ngIf="tansection.status_tansection=='Allowed'">
+          <button ion-button color="primary" (click)="viewTansection(tansection)">
+            <ion-icon name="md-eye"></ion-icon>
+            View Detail
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>  
+
+    </ion-list>
+
+    <ion-list no-margin *ngSwitchCase="'request'">        
+      <ion-item-sliding *ngFor="let tansection of tansectionsApprove">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{tansection.personal_request.pictureProfile}}">
+          </ion-avatar>
+          <h2>{{tansection.personal_request.titleName}} {{tansection.personal_request.firstName}}</h2>
+          <h3>Request tansection</h3>
+          <p> Detail : {{tansection.personal_request.titleName}} {{tansection.personal_request.firstName}} Request
+              {{tansection.personal_approve.titleName}} {{tansection.personal_approve.firstName}}
+          </p>
+          <p>Status : {{tansection.status_tansection}}</p>
+        </ion-item>
+        <ion-item-options side="left" *ngIf="tansection.status_tansection=='Wait'">
+          <button ion-button color="secondary" (click)="approveTansection(tansection)">
+            <ion-icon name="md-checkmark-circle"></ion-icon>
+            Approve
+          </button>
+          <button ion-button color="danger" (click)="rejectTansection(tansection)">
+            <ion-icon name="md-close-circle"></ion-icon>
+            Reject
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      
+    </ion-list>
+  </div>
 
 </ion-content>

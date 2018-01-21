@@ -190,7 +190,7 @@ export class UpdatePersonalPage {
       this.PersonalService.updatePersonal(uid,this.personal).then(result=>{
         console.log('sucess'+result);
         this.Tost.presentToast('sucess'+result);
-        this.approvePersonal = new ApprovePersonal('',false,this.personal.firstName,'Request Approve');
+        this.approvePersonal = new ApprovePersonal('',false,this.personal,'Request Approve');
         this.ApprovePersonalService.addApprovePersonal(uid,this.approvePersonal).then(result=>{
           console.log('sucess'+result);
           this.Tost.presentToast('sucess'+result); 

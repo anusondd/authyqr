@@ -1,5 +1,3 @@
-import { ApprovePersonal } from "./Approve-presonal";
-
 export class Personal {
     key?:string;
     titleName:string;
@@ -12,6 +10,8 @@ export class Personal {
     phoneNumber:string;
     pictureProfile:string;
     picturePersonalCard:string;
+    uid:string;
+    token:string;
 
     constructor(
         titleName:string,
@@ -23,7 +23,10 @@ export class Personal {
         metier:string,
         phoneNumber:string,
         pictureProfile:string,
-        picturePersonalCard:string,
+        picturePersonalCard:string,        
+        uid:string,
+        token:string
+        
     ){
         this.titleName=titleName;
         this.firstName=firstName;
@@ -34,6 +37,8 @@ export class Personal {
         this.metier=metier;
         this.phoneNumber=phoneNumber;
         this.pictureProfile=pictureProfile;
-        this.picturePersonalCard=picturePersonalCard;    
+        this.picturePersonalCard=picturePersonalCard;
+        this.uid = uid;
+        this.token = token;    
     }
 }

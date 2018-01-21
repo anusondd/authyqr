@@ -4,6 +4,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
+import { TansectionServiceProvider } from '../../providers/tansection-service/tansection-service';
+import { Tansection } from '../../models/tansection';
+import { Personal } from '../../models/Presonal';
 
 @IonicPage()
 @Component({
@@ -14,7 +17,11 @@ export class QrcodePage {
 
   option : BarcodeScannerOptions;
   results: {};
-  qrcodeId: String;
+  uidApprove:string;
+  tansection:Tansection;
+  personalRequest:Personal;
+  personalApprove:Personal;
+
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +31,7 @@ export class QrcodePage {
     private PersonalService:PersonalServiceProvider,
     public Tost:TostServiceProvider,
     public app:App,
+    private tansectionService:TansectionServiceProvider
   ) {
   }
 
@@ -33,26 +41,52 @@ export class QrcodePage {
 
   async scan(){
     
-    this.option = {
-      prompt: 'Scan barcode'
-    }
-    //this.results = await 
+    this.option = {prompt: 'Scan barcode'};
     await this.barcodeScanner.scan(this.option).then(res=>{
       this.results  = res;
-      this.qrcodeId = res.text;
-      this.Tost.presentToast(this.qrcodeId.toString());
-     
+      this.uidApprove = res.text;
+      //let encode = btoa(this.uidApprove);
+      //this.Tost.presentToast(this.uidApprove);
+      this.requestTansection(this.uidApprove);
+      
     });
-    
-    console.log(this.results);
   }
 
   async endCode(){
-    let id = localStorage.getItem('UID');
-    console.log(id);
-    const results = await this.barcodeScanner.encode(
-      this.barcodeScanner.Encode.TEXT_TYPE,id
-    );
+    let uid = localStorage.getItem('UID');
+    //let endcode = atob(uid);
+    const results = await this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,uid);
+  }
+
+  requestTansection(uid_approve:string){
+    try {
+        let uid = localStorage.getItem('UID');
+        this.PersonalService.getPersonal(uid).subscribe(requst=>{
+          this.personalRequest = requst;
+        });
+        this.PersonalService.getPersonal(uid_approve).subscribe(approve=>{
+          this.personalApprove = approve;
+        });
+        this.tansection = new Tansection
+        ( 0,
+          '',
+          this.personalRequest.uid,
+          this.personalRequest,
+          this.personalApprove.uid,
+          this.personalApprove,
+          'Wait'
+        );//Wait, Allowed, Disallow
+        this.tansectionService.requestTansection(this.tansection).then(resul=>{
+            this.Tost.presentToast('request Sucess'+resul);
+            const root = this.app.getRootNav();
+                  root.popToRoot();
+        });
+      
+    } catch (error) {
+      this.Tost.presentToast('request error'+error);
+      
+    }
+    
   }
 
 }

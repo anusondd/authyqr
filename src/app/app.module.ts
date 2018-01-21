@@ -22,6 +22,7 @@ import { VerifyPhonenumberServiceProvider } from '../providers/verify-phonenumbe
 import { Camera } from '@ionic-native/camera';
 import { ApprovePersonalServiceProvider } from '../providers/approve-personal-service/approve-personal-service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { TansectionServiceProvider } from '../providers/tansection-service/tansection-service';
 
 
 
@@ -50,7 +51,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     VerifyPhonenumberServiceProvider,
     Camera,
     ApprovePersonalServiceProvider,
-    BarcodeScanner
+    BarcodeScanner,
+    TansectionServiceProvider
   ]
 })
 export class AppModule {}

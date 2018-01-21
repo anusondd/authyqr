@@ -1,18 +1,20 @@
+import { Personal } from "./Presonal";
+
 export class ApprovePersonal {
     key?:string;
     approver:string;
     statusApprove:boolean;
-    namePersonal:string;
+    Personal:Personal;
     description:string;
     constructor(
         approver:string,
         statusApprove:boolean,
-        namePersonal:string,
+        Personal:Personal,
         description:string
     ){
         this.approver       = approver;
         this.statusApprove  = statusApprove;
         this.description    = description;
-        this.namePersonal   = namePersonal;
+        this.Personal       = Personal;
     }
 }
