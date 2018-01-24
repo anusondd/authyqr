@@ -2,7 +2,7 @@ import { Personal } from "./Presonal";
 
 export class Tansection {
     $key:string;
-    block_ID:number;
+    block_ID:string;
     time_stamp:string;
     uid_request:string;
     personal_request:Personal;
@@ -10,7 +10,7 @@ export class Tansection {
     personal_approve:Personal;
     status_tansection:string;
     constructor(
-        block_ID:number,
+        block_ID:string,
         time_stamp:string,
         uid_request:string,
         personal_request:Personal,

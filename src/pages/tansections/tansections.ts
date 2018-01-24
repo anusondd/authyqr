@@ -5,6 +5,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { TansectionServiceProvider } from '../../providers/tansection-service/tansection-service';
 import { Tansection } from '../../models/tansection';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
+import { BlockchainServiceProvider } from '../../providers/blockchain-service/blockchain-service';
+import { Blockchain } from '../../models/blockchain';
 
 /**
  * Generated class for the TansectionsPage page.
@@ -24,6 +26,8 @@ export class TansectionsPage {
   tansection:Tansection;
   tansectionsRequest:Tansection[];
   tansectionsApprove:Tansection[];
+  blockchain:Blockchain;
+  bloclNumber:number;
 
   constructor(
     public navCtrl: NavController, 
@@ -32,7 +36,8 @@ export class TansectionsPage {
     private Auth:AngularFireAuth,
     public Tost:TostServiceProvider,
     private tansectionService:TansectionServiceProvider,
-    private PersonalService:PersonalServiceProvider
+    private PersonalService:PersonalServiceProvider,
+    private blockchainService:BlockchainServiceProvider
   ) {
     let uid = localStorage.getItem('UID');
     console.log('uid',uid);
@@ -49,7 +54,28 @@ export class TansectionsPage {
       });
     }
     
+    let blockNumber = '0';
+    let time_stamp = new Date().toTimeString();
+    console.log(time_stamp);
+    let privateKey = btoa('Blockchain:'+time_stamp+':'+blockNumber);
+    console.log('btoa',privateKey);
+    //let decode = atob(privateKey);
+    //console.log('atob',decode);
+
+    this.blockchain = new Blockchain(blockNumber,privateKey,time_stamp,null);
+    console.log(this.blockchain);
+
+    console.log(this.blockchain);
+    let jsonString =  JSON.stringify(this.blockchain);
+    console.log('String',jsonString);
     
+    /* this.blockchainService.generateBlock(this.blockchain).then(res=>{
+      console.log("res",res);      
+    })
+    this.blockchainService.getlastBlock().subscribe(block=>{
+      console.log(block.length);
+      this.bloclNumber = block.length-1;      
+    }) */
   }
 
   approveTansection(tansection:Tansection){
@@ -57,7 +83,7 @@ export class TansectionsPage {
     let time_stamp = new Date().toTimeString();
     
     this.tansection = new Tansection(
-      0,
+      this.bloclNumber.toString(),
       time_stamp,
       tansection.uid_request,
       tansection.personal_request,
@@ -67,15 +93,22 @@ export class TansectionsPage {
     );
     console.log(this.tansection);
     
+    
+    
     //Wait, Allowed, Disallow
-    //this.tansectionService.updateTansection(tansection.key,)
+    this.tansectionService.approveTansection(tansection.$key,this.tansection).then(res=>{
+      
+        this.blockchainService.commitTansection(this.bloclNumber.toString(),this.tansection).then(res=>{
+
+        })     
+    })
   }
 
   rejectTansection(tansection:Tansection){
     console.log('get',tansection);
     //console.log('get',tansection.$key);
     this.tansection = new Tansection(
-      0,
+      '0000',
       '',
       tansection.uid_request,
       tansection.personal_request,

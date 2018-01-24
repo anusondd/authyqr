@@ -68,7 +68,7 @@ export class QrcodePage {
           this.personalApprove = approve;
         });
         this.tansection = new Tansection
-        ( 0,
+        ( '0000',
           '',
           this.personalRequest.uid,
           this.personalRequest,

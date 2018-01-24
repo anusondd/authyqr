@@ -23,6 +23,7 @@ import { Camera } from '@ionic-native/camera';
 import { ApprovePersonalServiceProvider } from '../providers/approve-personal-service/approve-personal-service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { TansectionServiceProvider } from '../providers/tansection-service/tansection-service';
+import { BlockchainServiceProvider } from '../providers/blockchain-service/blockchain-service';
 
 
 
@@ -52,7 +53,8 @@ import { TansectionServiceProvider } from '../providers/tansection-service/tanse
     Camera,
     ApprovePersonalServiceProvider,
     BarcodeScanner,
-    TansectionServiceProvider
+    TansectionServiceProvider,
+    BlockchainServiceProvider
   ]
 })
 export class AppModule {}
