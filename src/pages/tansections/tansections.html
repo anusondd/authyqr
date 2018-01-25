@@ -37,7 +37,7 @@
           <p>Status : {{tansection.status_tansection}}</p>
         </ion-item>
         <ion-item-options side="right" *ngIf="tansection.status_tansection=='Allowed'">
-          <button ion-button color="primary" (click)="viewTansection(tansection)">
+          <button ion-button color="primary" navPush="ViewTansectionPage" [navParams]="{tansec:tansection}">
             <ion-icon name="md-eye"></ion-icon>
             View Detail
           </button>

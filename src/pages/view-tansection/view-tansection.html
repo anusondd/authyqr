@@ -1,0 +1,77 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>view-tansection</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    
+    <div class="center_screen">
+        
+        <div class="pro-pic-change">
+          <div class="image">
+            <img *ngIf="pictureProfile==''" src="assets/img/user-icon.png" />
+            <img *ngIf="pictureProfile!=''" src="{{pictureProfile}}|async" />  
+          </div>
+          <!-- <button ion-button round outline color=primary (click)="takePictureProfile()">
+            <ion-icon name="md-camera"></ion-icon>
+          </button> -->
+        </div>
+        <div class="card-pic-change">
+            <div class="image_rotate" (click)="takePicturePersonalCard()">
+              <img *ngIf="picturePersonalCard==''" src="assets/img/idCard.png" />
+              <img *ngIf="picturePersonalCard!=''" src="{{picturePersonalCard}}|async" />  
+            </div>
+        </div>
+        <ion-list>
+            <ion-item no-lines>
+                <ion-icon name="md-clock" item-start color="lightdark"></ion-icon>
+                <p>Tansection Time</p>
+                <h2>{{tansection.time_stamp}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+                <ion-icon name="md-cube" item-start color="lightdark"></ion-icon>
+                <p>Block Number</p>
+                <h2>{{tansection.block_ID}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+                  <ion-icon name="md-person" item-start color="lightdark"></ion-icon>
+                  <p>Name </p>
+                  <h2>{{personal.titleName}} {{personal.firstName}} {{personal.lastName}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-icon name="ios-call-outline" item-start color="lightdark"></ion-icon>
+              <p>Mobile</p>
+              <h2>{{personal.phoneNumber}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-icon name="ios-home-outline" item-start color="lightdark"></ion-icon>
+              <p>Address</p>
+              <h2>{{personal.address}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-icon name="ios-happy-outline" item-start color="lightdark"></ion-icon>
+              <p>Birthday</p>
+              <h2>{{personal.birthday}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-icon name="ios-briefcase" item-start color="lightdark"></ion-icon>
+              <p>Metier</p>
+              <h2>{{personal.metier}}</h2>
+            </ion-item>
+            <ion-item no-lines>
+              <ion-icon name="md-card" item-start color="lightdark"></ion-icon>
+              <p>Number ID</p>
+              <h2>{{personal.personalNumber}}</h2>
+            </ion-item>
+          </ion-list>
+        <ion-list>
+            <ion-item no-lines></ion-item>
+        </ion-list>
+      </div>
+    
+</ion-content>

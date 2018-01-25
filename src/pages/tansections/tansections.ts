@@ -125,7 +125,9 @@ export class TansectionsPage {
   }
 
   viewTansection(tansection:Tansection){
-    console.log(tansection);    
+    console.log(tansection);
+    this.navCtrl.push('ViewTansectionPage');
+    //this.navParams.   
   }
 
   ionViewDidLoad() {
