@@ -28,6 +28,7 @@ export class HomePage {
     private ApprovePersonalService:ApprovePersonalServiceProvider
   ) {
     let uid = localStorage.getItem('UID');
+    
     this.PersonalService.getPersonal(uid).subscribe(user=>{
       if(user.phoneNumber==''){
         console.log('toVerifyPhonenumber');

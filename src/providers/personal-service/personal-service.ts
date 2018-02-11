@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import {  AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database-deprecated';
 import { Personal } from '../../models/Presonal';
 import { ScalarQuery, FirebaseListFactoryOpts } from 'angularfire2/database-deprecated/interfaces';
+import { HttpParams } from '@angular/common/http/src/params';
 
 
 @Injectable()
-export class PersonalServiceProvider {
+export class PersonalServiceProvider { 
 
   
   opts: FirebaseListFactoryOpts;
@@ -15,7 +16,22 @@ export class PersonalServiceProvider {
     public http: HttpClient,
     private Database:AngularFireDatabase
   ) {
-    console.log('Hello PersonalServiceProvider Provider');
+    console.log('Hello PersonalServiceProvider Provider');    
+  }
+
+  httpGet(){
+    let data = {data:'data'};
+    
+
+    // this.http.post('http://ddetabi.com/Home/api',JSON.stringify(data)).subscribe(data=>{
+    //   console.log(data);      
+    // });
+
+    this.http.get('http://ddetabi.com/Home/api',{params:{'id':'7','username':'anusondd'}}).subscribe(data=>{
+      console.log(data);      
+    });
+  
+  
     
   }
 

@@ -31,10 +31,12 @@ export class LoginPage {
     private PersonalService:PersonalServiceProvider,
     public app:App
   ) {
+    //this.PersonalService.httpGet();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    
     
     
   }
@@ -64,6 +66,13 @@ export class LoginPage {
           }          
         });
       });
+  }
+
+  gotoLoginApprover(){
+    this.navCtrl.setRoot('LoginApproverPage');    
+            const root = this.app.getRootNav();
+              root.popToRoot();
+
   }
 
 }

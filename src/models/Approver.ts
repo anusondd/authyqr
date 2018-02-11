@@ -4,4 +4,5 @@ export class Approver {
     lastName:string;
     pictureProfile:string;
     jobPosition:string;
+    token:string;
 }
