@@ -34,7 +34,7 @@
           <p> Detail : {{tansection.personal_request.titleName}} {{tansection.personal_request.firstName}} Request
               {{tansection.personal_approve.titleName}} {{tansection.personal_approve.firstName}}
           </p>
-          <p>Status : {{tansection.status_tansection}}</p>
+          <p class="{{tansection.status_tansection}}" >Status : {{tansection.status_tansection}}</p>
         </ion-item>
         <ion-item-options side="right" *ngIf="tansection.status_tansection=='Allowed'">
           <button ion-button color="primary" navPush="ViewTansectionPage" [navParams]="{tansec:tansection}">
@@ -57,13 +57,13 @@
           <p> Detail : {{tansection.personal_request.titleName}} {{tansection.personal_request.firstName}} Request
               {{tansection.personal_approve.titleName}} {{tansection.personal_approve.firstName}}
           </p>
-          <p>Status : {{tansection.status_tansection}}</p>
+          <p class="{{tansection.status_tansection}}" >Status : {{tansection.status_tansection}}</p>
         </ion-item>
         <ion-item-options side="left" *ngIf="tansection.status_tansection=='Wait'">
           <button ion-button color="secondary" (click)="approveTansection(tansection)">
             <ion-icon name="md-checkmark-circle"></ion-icon>
             Approve
-          </button>
+          </button> 
           <button ion-button color="danger" (click)="rejectTansection(tansection)">
             <ion-icon name="md-close-circle"></ion-icon>
             Reject

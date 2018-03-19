@@ -9,6 +9,7 @@ import { ApprovePersonalServiceProvider } from '../../providers/approve-personal
 import { Personal } from '../../models/Presonal';
 import { ApprovePersonal } from '../../models/Approve-presonal';
 import { Tansection } from '../../models/tansection';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 
 @IonicPage()
@@ -34,7 +35,8 @@ export class ViewTansectionPage {
     public Tost:TostServiceProvider,
     public app:App,
     public camera: Camera,
-    private ApprovePersonalService:ApprovePersonalServiceProvider
+    private ApprovePersonalService:ApprovePersonalServiceProvider,
+    public loading:LoadingServiceProvider
   ) {
     this.tansection = this.navParams.get("tansec");
     console.log(this.tansection.uid_approve);
@@ -42,7 +44,7 @@ export class ViewTansectionPage {
     this.pictureProfile = this.personal.pictureProfile;
     this.picturePersonalCard = this.personal.picturePersonalCard;
       
-
+    this.loading.presentLoading(2000);
     
   }
 

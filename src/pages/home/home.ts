@@ -5,6 +5,7 @@ import { PersonalServiceProvider } from '../../providers/personal-service/person
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { ApprovePersonalServiceProvider } from '../../providers/approve-personal-service/approve-personal-service';
 import { FormBuilder } from '@angular/forms';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 
 @IonicPage()
@@ -25,7 +26,8 @@ export class HomePage {
     private PersonalService:PersonalServiceProvider,
     public Tost:TostServiceProvider,
     public app:App,
-    private ApprovePersonalService:ApprovePersonalServiceProvider
+    private ApprovePersonalService:ApprovePersonalServiceProvider,
+    public loading:LoadingServiceProvider
   ) {
     let uid = localStorage.getItem('UID');
     
@@ -55,6 +57,7 @@ export class HomePage {
         }            
       }
     })
+    this.loading.presentLoading(2000);
   }
 
   ionViewDidLoad() {

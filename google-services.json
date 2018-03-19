@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "209725170616",
+    "firebase_url": "https://blockchain-a.firebaseio.com",
+    "project_id": "blockchain-a",
+    "storage_bucket": "blockchain-a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209725170616:android:1efd5735daca3c99",
+        "android_client_info": {
+          "package_name": "northbkk.blockchain_api.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209725170616-rvfqtp6hnqam848gt3gokpahod7vn0hm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYVUhXr2a4xYS-RirS1cSdj6lC_YRwB_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

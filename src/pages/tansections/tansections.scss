@@ -1,9 +1,19 @@
 page-tansections {
-    .button{
+    .button {
         box-shadow: none;
-      }
-      .list-ios > .item-block:first-child {
+    }
+    .list-ios>.item-block:first-child {
         border: none;
-      }
-
+    }
+    .Wait {
+      color: #429cd6;
+    }
+    .Allowed {
+      color: #32db64;
+    }
+    .Disallow {
+      color: #f53d3d;
+    }
+    
 }
+

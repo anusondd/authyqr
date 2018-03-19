@@ -7,6 +7,7 @@ import { Tansection } from '../../models/tansection';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
 import { BlockchainServiceProvider } from '../../providers/blockchain-service/blockchain-service';
 import { Blockchain } from '../../models/blockchain';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 /**
  * Generated class for the TansectionsPage page.
@@ -37,10 +38,15 @@ export class TansectionsPage {
     public Tost:TostServiceProvider,
     private tansectionService:TansectionServiceProvider,
     private PersonalService:PersonalServiceProvider,
-    private blockchainService:BlockchainServiceProvider
+    private blockchainService:BlockchainServiceProvider,
+    public loading:LoadingServiceProvider
   ) {
     let uid = localStorage.getItem('UID');
     console.log('uid',uid);
+
+    // this.tansectionService.sendNotificetionTo('hSEwmmeDTzNQnrH0VWstw7wnf1s2','Hello',"ok").then(res=>{
+    //   console.log('sendNotificetionTo',res);
+    // })
     
     if(uid){
       this.tansectionService.getListTansectionRequest(uid).subscribe(tansec=>{
@@ -69,14 +75,14 @@ export class TansectionsPage {
     let jsonString =  JSON.stringify(this.blockchain);
     console.log('String',jsonString);
     
-    /* this.blockchainService.generateBlock(this.blockchain).then(res=>{
+    this.blockchainService.generateBlock(this.blockchain).then(res=>{
       console.log("res",res);      
     })
     this.blockchainService.getlastBlock().subscribe(block=>{
       console.log(block.length);
       this.bloclNumber = block.length-1;      
-    }) */
-  }
+    })
+  } 
 
   approveTansection(tansection:Tansection){
     //console.log(tansection);
@@ -97,11 +103,15 @@ export class TansectionsPage {
     
     //Wait, Allowed, Disallow
     this.tansectionService.approveTansection(tansection.$key,this.tansection).then(res=>{
-      
+
         this.blockchainService.commitTansection(this.bloclNumber.toString(),this.tansection).then(res=>{
 
-        })     
+        })
+        this.tansectionService.sendNotificetionTo(tansection.personal_approve.token,'Reust Transection','Form'+tansection.personal_request.firstName).then(res=>{
+          console.log(" QR sendNotificetionTo",res);          
+        });     
     })
+    this.loading.presentLoading(3000);
   }
 
   rejectTansection(tansection:Tansection){

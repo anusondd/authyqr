@@ -6,6 +6,7 @@ import { PersonalServiceProvider } from '../../providers/personal-service/person
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { ApprovePersonalServiceProvider } from '../../providers/approve-personal-service/approve-personal-service';
 import { Personal } from '../../models/Presonal';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 
 
@@ -28,7 +29,8 @@ export class PersonalPage {
     private PersonalService:PersonalServiceProvider,
     public Tost:TostServiceProvider,
     public app:App,
-    private ApprovePersonalService:ApprovePersonalServiceProvider
+    private ApprovePersonalService:ApprovePersonalServiceProvider,
+    public loading:LoadingServiceProvider
   ) {
     let uid = localStorage.getItem('UID');
     this.PersonalService.getPersonal(uid).subscribe(person=>{
@@ -36,6 +38,7 @@ export class PersonalPage {
       this.personal = person;
       
     })
+    this.loading.presentLoading(3000);
 
   }
 

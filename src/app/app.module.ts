@@ -24,6 +24,8 @@ import { ApprovePersonalServiceProvider } from '../providers/approve-personal-se
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { TansectionServiceProvider } from '../providers/tansection-service/tansection-service';
 import { BlockchainServiceProvider } from '../providers/blockchain-service/blockchain-service';
+import { FCM } from '@ionic-native/fcm';
+import { LoadingServiceProvider } from '../providers/loading-service/loading-service';
 
 
 
@@ -54,7 +56,9 @@ import { BlockchainServiceProvider } from '../providers/blockchain-service/block
     ApprovePersonalServiceProvider,
     BarcodeScanner,
     TansectionServiceProvider,
-    BlockchainServiceProvider
+    BlockchainServiceProvider,
+    FCM,
+    LoadingServiceProvider
   ]
 })
 export class AppModule {}

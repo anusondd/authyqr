@@ -7,6 +7,7 @@ import {  AngularFireDatabase} from 'angularfire2/database-deprecated';
 import { Personal } from '../../models/Presonal';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
 import { Observable } from 'rxjs/Observable';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 @IonicPage()
 @Component({
@@ -29,7 +30,8 @@ export class LoginPage {
     public Tost:TostServiceProvider,
     private Database:AngularFireDatabase,
     private PersonalService:PersonalServiceProvider,
-    public app:App
+    public app:App,
+    public loading:LoadingServiceProvider
   ) {
     //this.PersonalService.httpGet();
   }
@@ -66,6 +68,8 @@ export class LoginPage {
           }          
         });
       });
+
+      this.loading.presentLoading(3000);
   }
 
   gotoLoginApprover(){

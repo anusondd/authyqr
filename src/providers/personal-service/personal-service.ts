@@ -68,4 +68,8 @@ export class PersonalServiceProvider {
   updatePersonal(key:string,personal:Personal){
     return this.Database.object('personal/'+key).update(personal);
   }
+
+  updateToken(key:string,token){
+    return this.Database.object('personal/'+key+'/token').set(token);
+  }
 }

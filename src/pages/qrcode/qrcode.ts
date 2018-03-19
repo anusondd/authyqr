@@ -77,10 +77,13 @@ export class QrcodePage {
           'Wait'
         );//Wait, Allowed, Disallow
         this.tansectionService.requestTansection(this.tansection).then(resul=>{
+          let detail = this.tansection.personal_request.firstName+' RequestTansection';
+          this.tansectionService.sendNotificetionTo(this.tansection.personal_request.token,'Request',detail).then(res=>{
             this.Tost.presentToast('request Sucess'+resul);
             const root = this.app.getRootNav();
                   root.popToRoot();
-        });
+          })
+    });
       
     } catch (error) {
       this.Tost.presentToast('request error'+error);
