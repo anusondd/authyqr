@@ -158,4 +158,33 @@ export class TansectionsPage {
    
   }
 
+  inputRequest:string="";
+  filterRequest(event){
+    console.log('filter',event);
+    if(event!=""){
+      let arr = this.tansectionsRequest.filter(obj => obj.personal_request.firstName === this.inputRequest); 
+      this.tansectionsRequest = arr;
+      console.log(arr);
+      
+    }else{
+      let uid = localStorage.getItem('UID');
+      this.tansectionService.getListTansectionRequest(uid).subscribe(tansec=>{
+        console.log('tansecRequest',tansec);
+        this.tansectionsRequest = tansec;      
+      });
+          
+      // this.tansectionService.getListTansectionApprove(uid).subscribe(tansec=>{
+      //     console.log('tansecApprove',tansec);
+      //     this.tansectionsApprove = tansec;
+      // });
+    }    
+       
+  }
+
+  inputApprove:string="";
+  filterApprove(event){
+    console.log(event);    
+    //this.tansectionsApprove.find(obj => obj.personal_request.firstName == "")
+  }
+
 }

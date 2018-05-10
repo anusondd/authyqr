@@ -26,6 +26,7 @@ import { TansectionServiceProvider } from '../providers/tansection-service/tanse
 import { BlockchainServiceProvider } from '../providers/blockchain-service/blockchain-service';
 import { FCM } from '@ionic-native/fcm';
 import { LoadingServiceProvider } from '../providers/loading-service/loading-service';
+import { NotificationProvider } from '../providers/notification/notification';
 
 
 
@@ -58,7 +59,8 @@ import { LoadingServiceProvider } from '../providers/loading-service/loading-ser
     TansectionServiceProvider,
     BlockchainServiceProvider,
     FCM,
-    LoadingServiceProvider
+    LoadingServiceProvider,
+    NotificationProvider
   ]
 })
 export class AppModule {}

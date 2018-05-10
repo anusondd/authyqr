@@ -46,11 +46,16 @@
               <ion-option>Mrs.</ion-option>
             </ion-select>
         </div>
-    
-        <div class="input_area">
+
+          <!-- <div class="error" *ngIf="!personalFrom.controls['firstname'].valid&&personalFrom.controls['firstname'].dirty" >
+            <ion-icon name="alert"></ion-icon>
+            <span>* Firstname is required</span>
+          </div> -->          
+          <div class="input_area">            
             <ion-icon name="md-person"></ion-icon>
             <input type="text" placeholder="FirstName" formControlName="firstName">
           </div>
+
           <div class="input_area">
             <ion-icon name="md-person"></ion-icon>
             <input type="text" placeholder="LastName"  formControlName="lastName">
@@ -63,13 +68,13 @@
               <ion-icon name="ios-briefcase"></ion-icon>
               <input type="text" placeholder="metier" formControlName="metier">
             </div>        
-          <div class="input_area">
+          <div class="input_textarea">
             <ion-icon name="md-locate"></ion-icon>
-            <input type="text" placeholder="Address" formControlName="address">
+            <ion-textarea type="text" placeholder="Address" formControlName="address"></ion-textarea>
           </div>
           <div class="input_area">
             <ion-icon name="md-card"></ion-icon>
-            <input type="text" placeholder="Number ID" pattern="([0-9]*)" formControlName="personalNumber" (keyup)="checkPersonalNumber()">
+            <input type="text" placeholder="Number 13 digits only " pattern="([0-9]*)" formControlName="personalNumber" (keyup)="checkPersonalNumber()">
             <input type="hidden" formControlName="pictureProfile">
             <input type="hidden" formControlName="picturePersonalCard">
           </div> 

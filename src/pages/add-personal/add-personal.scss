@@ -8,6 +8,10 @@ page-add-personal {
       .center_screen {
         margin: auto;
         width: 100%;
+        .error{
+          color: red;
+          margin: auto;
+        }
         .input_textarea{
           display: flex;
           background-color: #fff;

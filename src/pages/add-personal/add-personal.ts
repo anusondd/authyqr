@@ -54,6 +54,11 @@ export class AddPersonalPage {
       cameraDirection:1
     };
 
+    this.form();
+    
+  }
+
+  form(){
     this.personalFrom = this.formBuilder.group({
       titleName:['Mr.',Validators.compose([Validators.required])],
       firstName:['Anusorn',Validators.compose([
@@ -91,24 +96,33 @@ export class AddPersonalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddPersonalPage');
+    this.form();
+    //console.log(this.personalFrom.valid);     
   }
 
   checkPersonalNumber(){
 
     let personalNumber =  this.personalFrom.controls['personalNumber'].value;
     console.log(personalNumber);
+    if(personalNumber.length == 13){
+      this.PersonalService.searchPersonalNumber(personalNumber).subscribe(person=>{
+        if(person.length>0){
+          console.log('person',person);
+          this.personalFrom.controls['check'].setValue('');
+          this.message = 'This PersonalNumber is already used.';
+          this.Tost.presentToast(this.message);
+        }else{
+          console.log('person = 0',person);
+          this.personalFrom.controls['check'].setValue('pass');
+          this.message = '';
+          this.Tost.presentToast('This PersonalNumber is Usable.');
+        } 
+      });
+    }else{
+      this.Tost.presentToast("Number 13 digits only");
+    }
     
-    this.PersonalService.searchPersonalNumber(personalNumber).subscribe(person=>{
-      if(person.length>0){
-        console.log('person',person);
-        this.personalFrom.controls['check'].setValue('');
-        this.message = 'This PersonalNumber is already used.';
-      }else{
-        console.log('person = 0',person);
-        this.personalFrom.controls['check'].setValue('pass');
-        this.message = '';
-      } 
-    })
+    
   }
 
   async takePictureProfile(){

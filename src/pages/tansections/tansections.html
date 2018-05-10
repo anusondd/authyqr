@@ -22,9 +22,10 @@
 
 
 <ion-content padding>
+  
   <div [ngSwitch]="friends">
     <ion-list no-margin *ngSwitchCase="'add'">
-
+        <!-- <ion-searchbar [(ngModel)]="inputRequest" (keyup)="filterRequest(inputRequest)"></ion-searchbar> -->
       <ion-item-sliding *ngFor="let tansection of tansectionsRequest">
         <ion-item>
           <ion-avatar item-start>
@@ -46,7 +47,8 @@
 
     </ion-list>
 
-    <ion-list no-margin *ngSwitchCase="'request'">        
+    <ion-list no-margin *ngSwitchCase="'request'">   
+        <!-- <ion-searchbar [(ngModel)]="inputApprove" (keyup)="filterApprove(inputApprove)"></ion-searchbar> -->     
       <ion-item-sliding *ngFor="let tansection of tansectionsApprove">
         <ion-item>
           <ion-avatar item-start>
