@@ -13,9 +13,9 @@ export class LoadingServiceProvider {
     console.log('Hello LoadingServiceProvider Provider');
   }
 
-  presentLoading(time:number) {
+  presentLoading(time:number,message:string) {
     let loader = this.loadingCtrl.create({
-      content: "Please wait...",
+      content: message,
       duration: time
     });
     loader.present();

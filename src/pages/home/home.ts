@@ -57,7 +57,7 @@ export class HomePage {
         }            
       }
     })
-    this.loading.presentLoading(2000);
+    this.loading.presentLoading(2000,'Welcome to Authy..');
   }
 
   ionViewDidLoad() {

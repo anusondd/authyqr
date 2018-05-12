@@ -67,9 +67,12 @@ export class LoginPage {
             }            
           }          
         });
+        this.loading.presentLoading(3000,"Login successful...");
+      }).catch(e=>{
+        this.loading.presentLoading(3000,"Login failed...");
       });
 
-      this.loading.presentLoading(3000);
+      
   }
 
   gotoLoginApprover(){

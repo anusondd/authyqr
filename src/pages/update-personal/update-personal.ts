@@ -9,6 +9,7 @@ import { ApprovePersonalServiceProvider } from '../../providers/approve-personal
 import { Personal } from '../../models/Presonal';
 import { ApprovePersonal } from '../../models/Approve-presonal';
 import { storage ,initializeApp } from 'firebase';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 @IonicPage()
 @Component({
@@ -37,7 +38,8 @@ export class UpdatePersonalPage {
     public Tost:TostServiceProvider,
     public app:App,
     public camera: Camera,
-    private ApprovePersonalService:ApprovePersonalServiceProvider
+    private ApprovePersonalService:ApprovePersonalServiceProvider,
+    public loading:LoadingServiceProvider
   ) {
     this.options  = {
       quality:100,
@@ -201,10 +203,11 @@ export class UpdatePersonalPage {
           console.log('err'+error);
           this.Tost.presentToast('err'+error);          
       })
-            
+        this.loading.presentLoading(2000,'Update Data Sucess...');
       }).catch(error=>{
           console.log('err'+error);
-          this.Tost.presentToast('err'+error);          
+          this.Tost.presentToast('err'+error);  
+          this.loading.presentLoading(2000,'Update Data Error...');        
       })
       
   }

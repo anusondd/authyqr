@@ -44,7 +44,7 @@ export class ViewTansectionPage {
     this.pictureProfile = this.personal.pictureProfile;
     this.picturePersonalCard = this.personal.picturePersonalCard;
       
-    this.loading.presentLoading(2000);
+    this.loading.presentLoading(2000,'Please wait...');
     
   }
 

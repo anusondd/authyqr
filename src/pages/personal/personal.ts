@@ -38,7 +38,7 @@ export class PersonalPage {
       this.personal = person;
       
     })
-    this.loading.presentLoading(3000);
+    this.loading.presentLoading(3000,'Please wait...');
 
   }
 

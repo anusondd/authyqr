@@ -20,5 +20,14 @@ export class TostServiceProvider {
     toast.present();
   }
 
+  showToastWithCloseButton(messages) {
+      const toast = this.toastCtrl.create({
+        message: messages,
+        showCloseButton: true,
+        closeButtonText: 'Ok'
+      });
+      toast.present();
+  }
+
 
 }

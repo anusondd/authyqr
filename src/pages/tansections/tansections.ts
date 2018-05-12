@@ -110,8 +110,11 @@ export class TansectionsPage {
         this.tansectionService.sendNotificetionTo(tansection.personal_approve.token,'Reust Transection','Form'+tansection.personal_request.firstName).then(res=>{
           console.log(" QR sendNotificetionTo",res);          
         });     
+        this.loading.presentLoading(3000,'Approve Tansection Sucess...');
+    }).catch(e=>{
+        this.loading.presentLoading(3000,'Approve Tansection Sucess...');
     })
-    this.loading.presentLoading(3000);
+    
   }
 
   rejectTansection(tansection:Tansection){
@@ -129,8 +132,10 @@ export class TansectionsPage {
     console.log(this.tansection);
     this.tansectionService.rejectTansection(tansection.$key,this.tansection).then(result=>{
       this.Tost.presentToast('Sucess :'+result);
+      this.loading.presentLoading(3000,'Reject Tansection Sucess...');
     }).catch(error=>{
       this.Tost.presentToast('Error :'+error);
+      this.loading.presentLoading(3000,'Reject Tansection Error...');
     });
   }
 

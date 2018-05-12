@@ -7,6 +7,7 @@ import { FCM } from '@ionic-native/fcm';
 import { PersonalServiceProvider } from '../providers/personal-service/personal-service';
 import { LoadingServiceProvider } from '../providers/loading-service/loading-service';
 import { NotificationProvider } from '../providers/notification/notification';
+import { TostServiceProvider } from '../providers/tost-service/tost-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +26,8 @@ export class MyApp {
     public toastCtrl: ToastController,
     private PersonalService:PersonalServiceProvider,
     public loading:LoadingServiceProvider,
-    private notification:NotificationProvider
+    private notification:NotificationProvider,
+    private tostService:TostServiceProvider
   ) {
      
     this.platform.ready().then(() => {
@@ -35,61 +37,40 @@ export class MyApp {
       splashScreen.hide();
       this.checkUser();
     });
-    this.loading.presentLoading(2000);
-    let To = "anusonddgmailcom";
-    this.notification.sendNotificetionTo(To,'Hi','hello').then(res=>{
-      console.log(res);      
-    }).catch(e=>{
-      console.log(e);      
-    });
+    this.loading.presentLoading(2000,'Please wait...');
+    // let To = "anusonddgmailcom";
+    // this.notification.sendNotificetionTo(To,'Hi','hello').then(res=>{
+    //   console.log(res);      
+    // }).catch(e=>{
+    //   console.log(e);      
+    // });
   }
 
   firebaseNotificetion(email){
     //let uid = localStorage.getItem('UID');
     this.fcm.subscribeToTopic(email).then(res=>{
-      this.tost('Topic :'+res);
+      this.tostService.presentToast('Topic :'+res);
     }).catch(e=>{
-      this.tost('Error :'+e);
+      this.tostService.presentToast('Error :'+e);
     });
     this.fcm.onNotification().subscribe(data=>{
         if(data.wasTapped){
-          this.showToastWithCloseButton('Notification foreground :'+data.wasTapped);
+          this.tostService.showToastWithCloseButton('Notification foreground :'+data.wasTapped);
           console.log("Received in background");
         } else {
           console.log("Received in foreground");
-          this.showToastWithCloseButton('Notification foreground : Fail'+data.wasTapped);
+          this.tostService.showToastWithCloseButton('Notification foreground : Fail'+data.wasTapped);
         };
       });
   }
 
-  tost(messages){
-    let toast = this.toastCtrl.create({
-      message: messages,
-      duration: 3000
-    });
-    toast.present();
-  }
-
-  showToastWithCloseButton(messages) {
-      const toast = this.toastCtrl.create({
-        message: messages,
-        showCloseButton: true,
-        closeButtonText: 'Ok'
-      });
-      toast.present();
-  }
-
-  // async getToken(){
-  //   let uid = localStorage.getItem('UID');
-  //   await this.fcm.getToken().then(token=>{
-  //     this.PersonalService.updateToken(uid,token).then(res=>{
-  //       console.log(res);               
-  //     })
-  //     this.firebaseNotificetion(token); 
-  //     localStorage.setItem('TOKEN',token);
-  //   })
+  async getToken(uid,email){
+    let token = email.replace('@','').replace('.','');
+    this.PersonalService.updateToken(uid,token).then(res=>{
+      console.log(res);               
+    })
     
-  // }
+  }
 
   async checkUser(){
 
@@ -97,13 +78,14 @@ export class MyApp {
         if(!user){
           this.rootPage = 'LoginPage';
         }else{
+          this.getToken(user.uid,user.email);
           this.rootPage = 'HomePage';
           localStorage.setItem('UID',user.uid);
           if (this.platform.is('android')) {
             //this.getToken();
             let topic = user.email.replace('@','').replace('.','');
             this.firebaseNotificetion(topic); 
-            this.showToastWithCloseButton(topic);
+            this.tostService.showToastWithCloseButton(topic);
             console.log('I am an android device!');
           }          
           

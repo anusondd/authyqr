@@ -7,6 +7,8 @@ import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { TansectionServiceProvider } from '../../providers/tansection-service/tansection-service';
 import { Tansection } from '../../models/tansection';
 import { Personal } from '../../models/Presonal';
+import { NotificationProvider } from '../../providers/notification/notification';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 @IonicPage()
 @Component({
@@ -31,7 +33,9 @@ export class QrcodePage {
     private PersonalService:PersonalServiceProvider,
     public Tost:TostServiceProvider,
     public app:App,
-    private tansectionService:TansectionServiceProvider
+    private tansectionService:TansectionServiceProvider,
+    private notification:NotificationProvider,
+    public loading:LoadingServiceProvider
   ) {
   }
 
@@ -76,17 +80,19 @@ export class QrcodePage {
           this.personalApprove,
           'Wait'
         );//Wait, Allowed, Disallow
-        this.tansectionService.requestTansection(this.tansection).then(resul=>{
+        this.tansectionService.requestTansection(this.tansection).then(resul=>{ 
           let detail = this.tansection.personal_request.firstName+' RequestTansection';
           this.tansectionService.sendNotificetionTo(this.tansection.personal_request.token,'Request',detail).then(res=>{
             this.Tost.presentToast('request Sucess'+resul);
+            this.loading.presentLoading(2000,'Request Sucess...');
             const root = this.app.getRootNav();
                   root.popToRoot();
           })
-    });
+        });
       
     } catch (error) {
       this.Tost.presentToast('request error'+error);
+      this.loading.presentLoading(2000,'Request Error...');
       
     }
     
