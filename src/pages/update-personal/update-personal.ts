@@ -106,20 +106,25 @@ export class UpdatePersonalPage {
     let personalNumber =  this.personalFrom.controls['personalNumber'].value;
     console.log(personalNumber);
     
-    this.PersonalService.searchPersonalNumber(personalNumber).subscribe(person=>{
-      if(person.length>0){
-        console.log('person',person);
-        this.personalFrom.controls['check'].setValue('');
-        this.message = 'This PersonalNumber is already used.';
-        this.Tost.presentToast(this.message);
-      }else{
-        console.log('person = 0',person);
-        this.personalFrom.controls['check'].setValue('pass');
-        this.message = '';
-        this.personalFrom.controls['personalNumber'].setValue('');
-        this.Tost.presentToast('This PersonalNumber is Usable.');
-      } 
-    })
+    if(personalNumber.length == 13){
+      this.PersonalService.searchPersonalNumber(personalNumber).subscribe(person=>{
+        if(person.length>0){
+          console.log('person',person);
+          this.personalFrom.controls['check'].setValue('');
+          this.message = 'This PersonalNumber is already used.';
+          this.Tost.presentToast(this.message);
+        }else{
+          console.log('person = 0',person);
+          this.personalFrom.controls['check'].setValue('pass');
+          this.message = '';
+          this.Tost.presentToast('This PersonalNumber is Usable.');
+        } 
+      });
+    }else{
+      this.personalFrom.controls['check'].setValue('');
+      this.Tost.presentToast("Number 13 digits only");
+    }
+
   }
 
   async takePictureProfile(){

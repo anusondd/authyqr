@@ -8,6 +8,7 @@ import { PersonalServiceProvider } from '../providers/personal-service/personal-
 import { LoadingServiceProvider } from '../providers/loading-service/loading-service';
 import { NotificationProvider } from '../providers/notification/notification';
 import { TostServiceProvider } from '../providers/tost-service/tost-service';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +28,8 @@ export class MyApp {
     private PersonalService:PersonalServiceProvider,
     public loading:LoadingServiceProvider,
     private notification:NotificationProvider,
-    private tostService:TostServiceProvider
+    private tostService:TostServiceProvider,
+    private backgroundMode: BackgroundMode
   ) {
      
     this.platform.ready().then(() => {
@@ -38,6 +40,7 @@ export class MyApp {
       this.checkUser();
     });
     this.loading.presentLoading(2000,'Please wait...');
+    // this.backgroundMode.enable();
     // let To = "anusonddgmailcom";
     // this.notification.sendNotificetionTo(To,'Hi','hello').then(res=>{
     //   console.log(res);      
@@ -49,17 +52,17 @@ export class MyApp {
   firebaseNotificetion(email){
     //let uid = localStorage.getItem('UID');
     this.fcm.subscribeToTopic(email).then(res=>{
-      this.tostService.presentToast('Topic :'+res);
+      //this.tostService.presentToast('Topic :'+res);
     }).catch(e=>{
       this.tostService.presentToast('Error :'+e);
     });
     this.fcm.onNotification().subscribe(data=>{
         if(data.wasTapped){
-          this.tostService.showToastWithCloseButton('Notification foreground :'+data.wasTapped);
-          console.log("Received in background");
+          //this.tostService.showToastWithCloseButton('Notification foreground :'+data.wasTapped);
+          //console.log("Received in background");
         } else {
-          console.log("Received in foreground");
-          this.tostService.showToastWithCloseButton('Notification foreground : Fail'+data.wasTapped);
+          //console.log("Received in foreground");
+          //this.tostService.showToastWithCloseButton('Notification foreground : Fail'+data.wasTapped);
         };
       });
   }
@@ -85,7 +88,7 @@ export class MyApp {
             //this.getToken();
             let topic = user.email.replace('@','').replace('.','');
             this.firebaseNotificetion(topic); 
-            this.tostService.showToastWithCloseButton(topic);
+            //this.tostService.showToastWithCloseButton(topic);
             console.log('I am an android device!');
           }          
           

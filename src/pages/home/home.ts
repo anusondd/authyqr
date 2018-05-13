@@ -6,6 +6,7 @@ import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { ApprovePersonalServiceProvider } from '../../providers/approve-personal-service/approve-personal-service';
 import { FormBuilder } from '@angular/forms';
 import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
+import { ApprovePersonal } from '../../models/Approve-presonal';
 
 
 @IonicPage()
@@ -16,6 +17,7 @@ import { LoadingServiceProvider } from '../../providers/loading-service/loading-
 export class HomePage {
 
   statusApprove:boolean;
+  approver:ApprovePersonal={approver:null,description:'',key:'',Personal:null,statusApprove:false};
 
   constructor(
     public navCtrl: NavController, 
@@ -46,6 +48,7 @@ export class HomePage {
         }else{
             this.ApprovePersonalService.getApprovePersonal(uid).subscribe(approve=>{
                 console.log('Approve',approve);
+                this.approver = approve;
                 this.statusApprove = approve.statusApprove;
                 if(approve.statusApprove==true){
                   this.navCtrl.setRoot('TabPage');    

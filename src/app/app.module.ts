@@ -27,6 +27,7 @@ import { BlockchainServiceProvider } from '../providers/blockchain-service/block
 import { FCM } from '@ionic-native/fcm';
 import { LoadingServiceProvider } from '../providers/loading-service/loading-service';
 import { NotificationProvider } from '../providers/notification/notification';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 
 
@@ -60,7 +61,8 @@ import { NotificationProvider } from '../providers/notification/notification';
     BlockchainServiceProvider,
     FCM,
     LoadingServiceProvider,
-    NotificationProvider
+    NotificationProvider,
+    BackgroundMode 
   ]
 })
 export class AppModule {}

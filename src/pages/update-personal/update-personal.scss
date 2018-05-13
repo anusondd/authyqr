@@ -8,13 +8,14 @@ page-update-personal {
       .center_screen {
         margin: auto;
         width: 100%;
+        padding-bottom: 60px;
         .error{
           color: red;
           margin: auto;
         }
         .input_textarea{
           display: flex;
-          background-color: #fff;
+          background-color: #fff; 
           border-radius: 60px;
           height: 10%;
           overflow: hidden;

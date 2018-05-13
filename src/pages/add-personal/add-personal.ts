@@ -119,6 +119,7 @@ export class AddPersonalPage {
         } 
       });
     }else{
+      this.personalFrom.controls['check'].setValue('');
       this.Tost.presentToast("Number 13 digits only");
     }
     

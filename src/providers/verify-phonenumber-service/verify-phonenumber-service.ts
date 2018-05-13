@@ -8,8 +8,8 @@ import { Platform } from 'ionic-angular';
 export class VerifyPhonenumberServiceProvider {
 
   partUrl = '';
-  apiKey    = 'af6269c4';
-  apiSecret = '071c66570685a8ca';
+  apiKey    = '6d39e644';
+  apiSecret = 'Ho4LwO3XotbINIR9';
   verifyPhonenumber:Promise<VerifyPhonenumber>;
   
 

@@ -19,9 +19,12 @@
             <ion-card-title>
               Waiting for information.
             </ion-card-title>
-          <p>
+          <p *ngIf="!approver.description">
             The system is checking your information. 
             Please wait for the system response.
+          </p>
+          <p *ngIf="approver.description">
+            {{approver.description}}
           </p>
         </ion-card-content>
       </ion-card>
