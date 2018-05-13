@@ -107,7 +107,7 @@ export class TansectionsPage {
         this.blockchainService.commitTansection(this.bloclNumber.toString(),this.tansection).then(res=>{
 
         })
-        this.tansectionService.sendNotificetionTo(tansection.personal_approve.token,'Reust Transection','Form'+tansection.personal_request.firstName).then(res=>{
+        this.tansectionService.sendNotificetionTo(tansection.personal_request.token,'Transection Approve','Form'+tansection.personal_approve.firstName).then(res=>{
           console.log(" QR sendNotificetionTo",res);          
         });     
         this.loading.presentLoading(3000,'Approve Tansection Sucess...');
@@ -132,6 +132,9 @@ export class TansectionsPage {
     console.log(this.tansection);
     this.tansectionService.rejectTansection(tansection.$key,this.tansection).then(result=>{
       this.Tost.presentToast('Sucess :'+result);
+      this.tansectionService.sendNotificetionTo(tansection.personal_request.token,'Transection Reject','Form'+tansection.personal_approve.firstName).then(res=>{
+        console.log(" QR sendNotificetionTo",res);          
+      });
       this.loading.presentLoading(3000,'Reject Tansection Sucess...');
     }).catch(error=>{
       this.Tost.presentToast('Error :'+error);
