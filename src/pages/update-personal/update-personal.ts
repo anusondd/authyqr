@@ -111,10 +111,13 @@ export class UpdatePersonalPage {
         console.log('person',person);
         this.personalFrom.controls['check'].setValue('');
         this.message = 'This PersonalNumber is already used.';
+        this.Tost.presentToast(this.message);
       }else{
         console.log('person = 0',person);
         this.personalFrom.controls['check'].setValue('pass');
         this.message = '';
+        this.personalFrom.controls['personalNumber'].setValue('');
+        this.Tost.presentToast('This PersonalNumber is Usable.');
       } 
     })
   }

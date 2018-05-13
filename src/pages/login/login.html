@@ -3,7 +3,7 @@
     <img class="logo" src="assets/img/authentication.png" alt="Logo">
     <div class="input_area">
         <ion-icon name="md-person"></ion-icon>
-      <input type="text" placeholder="E-mail" [(ngModel)]='user.email' >
+      <input type="email" placeholder="E-mail" [(ngModel)]='user.email' >
       </div>
       <div class="input_area">
         <ion-icon name="md-lock"></ion-icon>
@@ -22,7 +22,7 @@
     </div>
   </div>
   <ion-footer>
-      <button ion-button icon-left (click)="gotoLoginApprover()"  >
+      <button ion-button icon-left   >
         <ion-icon name="md-finger-print"></ion-icon>
         Welcome to AuthyQR 
       </button>

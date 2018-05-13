@@ -16,16 +16,16 @@
     <ion-card>
         <img src="assets/img/logo.svg"/>
         <ion-card-content>
-          <ion-card-title>
-            Nine Inch Nails Live
+            <ion-card-title>
+              Waiting for information.
             </ion-card-title>
           <p>
-            The most popular industrial group ever, and largely
-            responsible for bringing the music to a mass audience.
+            The system is checking your information. 
+            Please wait for the system response.
           </p>
         </ion-card-content>
       </ion-card>
-    <div *ngIf="statusApprove" class="slider_area">
+    <!-- <div *ngIf="statusApprove" class="slider_area">
         <ion-slides pager [autoplay]="2500">
           <ion-slide>
             <div class="slider_content">
@@ -60,9 +60,9 @@
           </ion-slide>
     
         </ion-slides>
-      </div>
+      </div> -->
       <div class="button_section">
-        <button ion-button color="primary" outline round (tap)="gotologin()">Get started</button>
+        <button ion-button color="primary" navPush="UpdatePersonalPage" outline round >Update Profile</button>
       </div>
   
 

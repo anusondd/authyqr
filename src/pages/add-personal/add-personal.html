@@ -67,17 +67,18 @@
           <div class="input_area">
               <ion-icon name="ios-briefcase"></ion-icon>
               <input type="text" placeholder="metier" formControlName="metier">
-            </div>        
+          </div>       
+          <div class="input_area">
+            <ion-icon name="md-card"></ion-icon>
+            <input type="text" placeholder="Number 13 digits only " pattern="([0-9]*)" formControlName="personalNumber" (change)="checkPersonalNumber()">
+            <input type="hidden" formControlName="pictureProfile">
+            <input type="hidden" formControlName="picturePersonalCard">
+          </div> 
           <div class="input_textarea">
             <ion-icon name="md-locate"></ion-icon>
             <ion-textarea type="text" placeholder="Address" formControlName="address"></ion-textarea>
           </div>
-          <div class="input_area">
-            <ion-icon name="md-card"></ion-icon>
-            <input type="text" placeholder="Number 13 digits only " pattern="([0-9]*)" formControlName="personalNumber" (keyup)="checkPersonalNumber()">
-            <input type="hidden" formControlName="pictureProfile">
-            <input type="hidden" formControlName="picturePersonalCard">
-          </div> 
+           
           <button ion-button margin-top full icon-right color="primary" round type="submit" [disabled]="!personalFrom.valid">SUBMIT
           </button>
         </form>
