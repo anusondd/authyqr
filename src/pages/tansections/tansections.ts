@@ -41,12 +41,24 @@ export class TansectionsPage {
     private blockchainService:BlockchainServiceProvider,
     public loading:LoadingServiceProvider
   ) {
+
+    // this.blockchainService.resetBlock();
+    // this.blockchainService.checkBlock();
+
+    this.blockchainService.blockNow().subscribe(block=>{
+      console.log('blockNow+++++++++++++',block.$value);      
+      this.bloclNumber = block.$value;
+    })
+
+    
+
     let uid = localStorage.getItem('UID');
     console.log('uid',uid);
 
     // this.tansectionService.sendNotificetionTo('hSEwmmeDTzNQnrH0VWstw7wnf1s2','Hello',"ok").then(res=>{
     //   console.log('sendNotificetionTo',res);
-    // })
+    // })   
+    
     
     if(uid){
       this.tansectionService.getListTansectionRequest(uid).subscribe(tansec=>{
@@ -60,32 +72,16 @@ export class TansectionsPage {
       });
     }
     
-    let blockNumber = '0';
-    let time_stamp = new Date().toTimeString();
-    console.log(time_stamp);
-    let privateKey = btoa('Blockchain:'+time_stamp+':'+blockNumber);
-    console.log('btoa',privateKey);
-    //let decode = atob(privateKey);
-    //console.log('atob',decode);
-
-    this.blockchain = new Blockchain(blockNumber,privateKey,time_stamp,null);
-    console.log(this.blockchain);
-
-    console.log(this.blockchain);
-    let jsonString =  JSON.stringify(this.blockchain);
-    console.log('String',jsonString);
     
-    this.blockchainService.generateBlock(this.blockchain).then(res=>{
-      console.log("res",res);      
-    })
-    this.blockchainService.getlastBlock().subscribe(block=>{
-      console.log(block.length);
-      this.bloclNumber = block.length-1;      
-    })
   } 
 
   approveTansection(tansection:Tansection){
     //console.log(tansection);
+    this.blockchainService.blockNow().subscribe(block=>{
+      console.log('blockNow+++++++++++++',block.$value);      
+      this.bloclNumber = block.$value;
+    });
+
     let time_stamp = new Date().toTimeString();
     
     this.tansection = new Tansection(
@@ -104,9 +100,7 @@ export class TansectionsPage {
     //Wait, Allowed, Disallow
     this.tansectionService.approveTansection(tansection.$key,this.tansection).then(res=>{
 
-        this.blockchainService.commitTansection(this.bloclNumber.toString(),this.tansection).then(res=>{
-
-        })
+        this.blockchainService.commitTansection(this.bloclNumber.toString(),this.tansection);
         this.tansectionService.sendNotificetionTo(tansection.personal_request.token,'Transection Approve','Form'+tansection.personal_approve.firstName).then(res=>{
           console.log(" QR sendNotificetionTo",res);          
         });     

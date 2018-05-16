@@ -19,6 +19,8 @@ export class TansectionServiceProvider {
     console.log('Hello TansectionServiceProvider Provider');
   }
 
+
+
   requestTansection(tansection: Tansection) {
     return this.Database.list('/tansection/').push(tansection);
 
