@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Platform } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { BarcodeScanner,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { PersonalServiceProvider } from '../../providers/personal-service/personal-service';
@@ -35,7 +35,8 @@ export class QrcodePage {
     public app:App,
     private tansectionService:TansectionServiceProvider,
     private notification:NotificationProvider,
-    public loading:LoadingServiceProvider
+    public loading:LoadingServiceProvider,
+    public platform: Platform, 
   ) {
   }
 
@@ -44,22 +45,31 @@ export class QrcodePage {
   }
 
   async scan(){
+    if (this.platform.is('cordova')) {
+      this.option = {prompt: 'Scan barcode'};
+      await this.barcodeScanner.scan(this.option).then(res=>{
+        this.results  = res;
+        this.uidApprove = res.text;
+        //let encode = btoa(this.uidApprove);
+        //this.Tost.presentToast(this.uidApprove);
+        this.requestTansection(this.uidApprove);
+        
+      });
+    }else{
+      this.Tost.showToastWithCloseButton('This function is only for mobile.');
+    } 
     
-    this.option = {prompt: 'Scan barcode'};
-    await this.barcodeScanner.scan(this.option).then(res=>{
-      this.results  = res;
-      this.uidApprove = res.text;
-      //let encode = btoa(this.uidApprove);
-      //this.Tost.presentToast(this.uidApprove);
-      this.requestTansection(this.uidApprove);
-      
-    });
   }
 
   async endCode(){
     let uid = localStorage.getItem('UID');
     //let endcode = atob(uid);
-    const results = await this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,uid);
+    if (this.platform.is('cordova')) {
+      const results = await this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,uid);
+    }else{
+      this.Tost.showToastWithCloseButton('This function is only for mobile.');
+    }
+    
   }
 
   requestTansection(uid_approve:string){
@@ -83,16 +93,20 @@ export class QrcodePage {
         this.tansectionService.requestTansection(this.tansection).then(resul=>{ 
           let detail = this.tansection.personal_request.firstName+' RequestTansection';
           this.tansectionService.sendNotificetionTo(this.tansection.personal_request.token,'Request',detail).then(res=>{
-            this.Tost.presentToast('request Sucess'+resul);
-            this.loading.presentLoading(2000,'Request Sucess...');
+            //this.Tost.presentToast('request Sucess'+resul);
+            this.loading.presentLoading(3000,'Request Sucess...');
+            this.navCtrl.setRoot('TansectionsPage'); 
             const root = this.app.getRootNav();
                   root.popToRoot();
           })
         });
       
     } catch (error) {
-      this.Tost.presentToast('request error'+error);
-      this.loading.presentLoading(2000,'Request Error...');
+      // this.Tost.presentToast('request error'+error);
+      this.loading.presentLoading(3000,'Request Error...');
+      this.navCtrl.setRoot('QrcodePage');
+      const root = this.app.getRootNav();
+                  root.popToRoot();
       
     }
     

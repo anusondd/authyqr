@@ -84,12 +84,12 @@ export class MyApp {
           this.getToken(user.uid,user.email);
           this.rootPage = 'HomePage';
           localStorage.setItem('UID',user.uid);
-          if (this.platform.is('android')) {
+          if (this.platform.is('cordova')) {
             //this.getToken();
             let topic = user.email.replace('@','').replace('.','');
             this.firebaseNotificetion(topic); 
             //this.tostService.showToastWithCloseButton(topic);
-            console.log('I am an android device!');
+            console.log('I am an cordova device!');
           }          
           
         }

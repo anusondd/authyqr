@@ -7,6 +7,7 @@ import { PersonalServiceProvider } from '../../providers/personal-service/person
 import { Personal } from '../../models/Presonal';
 import { TostServiceProvider } from '../../providers/tost-service/tost-service';
 import { VerifyPhonenumber } from '../../models/verify-Phone';
+import { LoadingServiceProvider } from '../../providers/loading-service/loading-service';
 
 @IonicPage()
 @Component({
@@ -32,7 +33,8 @@ export class VerifyPhonenumberPage {
     private Auth:AngularFireAuth,
     private PersonalService:PersonalServiceProvider,
     public Tost:TostServiceProvider,
-    public app:App
+    public app:App,
+    public loading:LoadingServiceProvider
   ) {
     
     this.phoneNumber = this.formBuilder.group({
@@ -123,7 +125,8 @@ export class VerifyPhonenumberPage {
                   this.Auth.authState.subscribe(user=>{
                       this.personal = new Personal('','','','','','','',this.number,'','',user.uid,'');
                       this.PersonalService.updatePersonal(user.uid,this.personal).then(res=>{
-                        this.Tost.presentToast('VerifyPhonenumber Success');
+                        //this.Tost.presentToast('VerifyPhonenumber Success');
+                        this.loading.presentLoading(4000,'VerifyPhonenumber Sucess...');
                         this.navCtrl.push('AddPersonalPage');
                       }).catch(error=>{
                         this.Tost.presentToast(error);
@@ -131,6 +134,7 @@ export class VerifyPhonenumberPage {
                       })
                   })                
                 }else{
+                  this.loading.presentLoading(4000,'Sorry, please try again....');
                   this.promptAlerts();
                 }
               })
