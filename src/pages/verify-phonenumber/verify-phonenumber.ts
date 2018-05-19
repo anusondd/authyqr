@@ -73,7 +73,7 @@ export class VerifyPhonenumberPage {
     console.log('ionViewDidLoad VerifyPhonenumberPage');
   }
 
-  sendOTP(phoneNumber:FormGroup){
+  sendOTP(phoneNumber:FormGroup){ 
     let Numberp = this.phoneNumber.value;
     let sub = Numberp.number;
     this.number = Numberp.number;
@@ -102,7 +102,9 @@ export class VerifyPhonenumberPage {
         inputs: [
           {
             name: 'OTP',
-            placeholder: '0000'
+            placeholder: '0000',
+            min:4,
+            max:4
           },
         ],
         buttons: [
